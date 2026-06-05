@@ -1,3 +1,5 @@
+package Tdas;
+
 public class Arena {
     private String idArena;
     private String nombreArena;

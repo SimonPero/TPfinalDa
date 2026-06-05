@@ -1,3 +1,5 @@
+package Tdas;
+
 public class Duelo {
     private int nroDuelo;
     private Personaje primerPersonaje;
