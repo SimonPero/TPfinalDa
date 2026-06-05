@@ -1,4 +1,9 @@
+import java.lang.foreign.Arena;
+
 public class torneoTest {
+    Personaje[] personajes = new Personaje[100];
+    Arma[] armas = new Arma[100];
+    Arena[] arenas = new Arena[100];
 
     public static void funcion1(){
 
