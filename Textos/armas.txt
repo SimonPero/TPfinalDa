@@ -1,0 +1,40 @@
+A001;Espada del Alba;Espada;45;true
+A002;Arco Sombrio;Arco;38;false
+A003;Baculo de Fuego;Baculo;52;true
+A004;Dagas Gemelas;Dagas;35;false
+A005;Martillo de Trueno;Martillo;50;true
+A006;Lanza de Hielo;Lanza;42;true
+A007;Hacha del Norte;Hacha;47;false
+A008;Libro de Sombras;Grimorio;55;true
+A009;Espada Runa;Espada;49;true
+A010;Ballesta Ligera;Ballesta;34;false
+A011;Cetro Lunar;Cetro;46;true
+A012;Katana Silenciosa;Katana;41;false
+A013;Escudo Solar;Escudo;30;true
+A014;Guadaña Oscura;Guadaña;53;true
+A015;Arco de Roble;Arco;36;false
+A016;Maza de Piedra;Maza;39;false
+A017;Tridente Marino;Tridente;44;true
+A018;Espada Corta;Espada;33;false
+A019;Baculo Estelar;Baculo;58;true
+A020;Hacha Doble;Hacha;48;false
+A021;Orbe Arcano;Orbe;54;true
+A022;Cuchilla de Arena;Cuchilla;37;false
+A023;Martillo Dorado;Martillo;51;true
+A024;Arpon del Abismo;Arpon;43;false
+A025;Vara del Sauce;Vara;40;true
+A026;Mandoble Real;Espada;56;false
+A027;Daga Venenosa;Daga;36;false
+A028;Arco Lunar;Arco;44;true
+A029;Baculo Marino;Baculo;47;true
+A030;Hacha Oxidada;Hacha;32;false
+A031;Lanza Real;Lanza;45;false
+A032;Tomo Antiguo;Grimorio;57;true
+A033;Espada de Jade;Espada;46;true
+A034;Maza Sombria;Maza;49;true
+A035;Guantes de Hierro;Guantes;31;false
+A036;Cetro Solar;Cetro;50;true
+A037;Katana Roja;Katana;42;false
+A038;Arco de Plata;Arco;39;true
+A039;Guadaña Lunar;Guadaña;55;true
+A040;Tridente Dorado;Tridente;46;false

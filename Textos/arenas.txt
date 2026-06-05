@@ -1,0 +1,10 @@
+R001;Coliseo del Norte;Valdoria;5000;3
+R002;Ruinas de Elden;Eldoria;2500;5
+R003;Templo de Cristal;Aerion;3200;4
+R004;Arena de Obsidiana;Drakmor;4200;5
+R005;Bosque Susurrante;Sylvaria;1800;2
+R006;Fortaleza del Este;Karnak;6000;4
+R007;Pantano Eterno;Nemor;1200;5
+R008;Isla del Viento;Auralis;2100;3
+R009;Torre del Eclipse;Noctaria;2700;4
+R010;Jardin de Bronce;Heliara;1500;2
