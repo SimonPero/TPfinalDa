@@ -42,9 +42,6 @@ public class Arena {
     }
     
     //Modificadores
-    public void setIdArena(String idArena) {
-        this.idArena = idArena;
-    }
     public void setNombreArena(String nombreArena) {
         this.nombreArena = nombreArena;
     }

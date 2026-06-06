@@ -42,9 +42,6 @@ public class Arma {
     }
    
     //Modificadores
-     public void setId(String idArma) {
-        this.idArma = idArma;
-    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

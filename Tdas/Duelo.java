@@ -65,9 +65,6 @@ public class Duelo {
     }
 
     //Modificadores
-    public void setNroDuelo(String nroDuelo) {
-        this.nroDuelo = nroDuelo;
-    }
     public void setPrimerPersonaje(Personaje primerPersonaje) {
         this.primerPersonaje = primerPersonaje;
     }

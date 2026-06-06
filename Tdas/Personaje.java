@@ -42,9 +42,6 @@ public class Personaje {
     }
     
     //Modificadores
-     public void setId(String id) {
-        this.id = id;
-    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
