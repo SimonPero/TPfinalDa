@@ -69,4 +69,12 @@ public class Personaje {
         return this.id.equals(otPersonaje.getId());
     }
 
+    public int sumaVictoria() {
+        return this.cantDuelosGandados += 1;
+    }
+
+    public int sumaDerrotas() {
+        return this.cantDuelosGandados += 1;
+    }
+
 }
