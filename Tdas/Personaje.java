@@ -59,5 +59,18 @@ public class Personaje {
     }
 
     //Propias del tipo
-    
+    public boolean equals(Personaje otPersonaje){
+        return this.id.equals(otPersonaje.getId());
+    }
+    public static boolean existePersonaje(Personaje [] array, String codigoIng){
+        boolean encontrado = false;
+        int i=0;
+        while (!encontrado && i<array.length) {
+            if (array[i] != null && array[i].getId() != null && array[i].getId().equals(codigoIng)){
+                encontrado = true;
+            }
+            i++;
+        }
+        return encontrado;
+    }
 }
