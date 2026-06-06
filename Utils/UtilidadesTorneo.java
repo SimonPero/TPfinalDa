@@ -44,4 +44,27 @@ public class UtilidadesTorneo {
                 : null;
     }
 
+    // Este modulo verifica si el codigo es valido universal
+    public boolean verificarCodigoUniversal(String codigo) {
+        boolean flag = true;
+        int i = 1;
+        if ((codigo == null) || (codigo.length() != 4)) {// Verfica que no sea nulo o longitud distinta de 4
+            flag = false;
+        } else {
+            codigo = codigo.trim();// Limpiamos espacios blancos
+
+            char c = codigo.charAt(0);// seleccionamos primer pos
+            Character.toUpperCase(c);
+            if (("ADRP").indexOf(c) != -1) {// verificamos que, dependiendo de que codigo,
+                while (i < codigo.length() && flag) {
+                    char num = codigo.charAt(i);
+                    if (!Character.isDigit(num))
+                        flag = false;
+                    i++;
+                }
+            }
+        }
+
+        return flag;
+    }
 }
