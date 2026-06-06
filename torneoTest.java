@@ -15,7 +15,7 @@ public class torneoTest {
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
 
-    // Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
+    // 1. Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
     public void cargarTxt() {
         cDatos.cargarArenas("./Textos/arenas.txt", arenas);
         cDatos.cargarArmas("./Textos/armas.txt", armas);
@@ -36,14 +36,14 @@ public class torneoTest {
     }
 
     // 2. Agregar un nuevo personaje
-    public static void agregarPersonaje(Personaje [] personajes) {
-        int i=0;
-        boolean cargado=false;
+    public void agregarPersonaje(Personaje[] personajes) {
+        int i = 0;
+        boolean cargado = false;
 
         System.out.print("Ingrese el codigo del personaje: ");
         String codigoP = sc.nextLine();
-        if ((personajes,codigoP)) {
-            System.out.println("Codigo invalido!");
+        if (uTorneo.verificarCodigoUniversal(codigoP) && uTorneo.buscarPersonaje(codigoP, personajes) == null) {
+            System.out.println("Codigo valido y cargado con exito!");
             System.out.print("Ingrese el nombre: ");
             String nombre = sc.nextLine();
             System.out.print("Ingrese el tipo de personaje: ");
@@ -54,72 +54,23 @@ public class torneoTest {
             int cantDG = sc.nextInt();
             System.out.print("Ingrese la cantidad de duelos perdidos: ");
             int cantDP = sc.nextInt();
-            //Busca el espacio null para cargar a un personaje nuevo
-            while(i<personajes.length && !cargado){
-                if(personajes[i]==null){
-                    personajes[i] = new Personaje(codigoP ,nombre ,codigoP ,cantDG ,cantDP );
+            // Busca el espacio null para cargar a un personaje nuevo
+            while (i < personajes.length && !cargado) {
+                if (personajes[i] == null) {
+                    personajes[i] = new Personaje(codigoP, nombre, codigoP, cantDG, cantDP);
+                    System.out.println(personajes[i].toString());
+                    System.out.println("Personaje cargado con exito!");
                     cargado = true;
                 }
                 i++;
             }
-        }else{
-            System.out.println("Codigo valido y cargado con exito!");
-        }
-        
-        
-    }
-
-    // Este modulo verifica si el codigo es valido universal
-    public static boolean verificarCodigoUniversal(String codigo) {
-        boolean flag = true;
-        int i = 1;
-
-        if ((codigo == null) || (codigo.length() != 4)) {// Verfica que no sea nulo o longitud distinta de 4
-            flag = false;
+            
+            
         } else {
-            codigo = codigo.trim();// Limpiamos espacios blancos
-
-            char c = codigo.charAt(0);
-            Character.toUpperCase(c);
-
-            switch (c) {
-                case 'A':
-                    while (!flag) {
-                        char num = codigo.charAt(i);
-                        if (Character.isLetter(num))
-                            flag = true;
-                        i++;
-                    }
-                case 'D':
-                    while (!flag) {
-                        char num = codigo.charAt(i);
-                        if (Character.isLetter(num))
-                            flag = true;
-                        i++;
-                    }
-                case 'P':
-                    while (!flag) {
-                        char num = codigo.charAt(i);
-                        if (Character.isLetter(num))
-                            flag = true;
-                        i++;
-                    }
-                case 'R':
-                    while (!flag) {
-                        char num = codigo.charAt(i);
-                        if (Character.isLetter(num))
-                            flag = true;
-                        i++;
-                    }
-                    break;
-
-                default:
-                    flag = false;
-                    break;
-            }
+            System.out.println("Codigo invalido!");
+            
         }
 
-        return flag;
     }
 
     // 3. Agregar un nuevo duelo al cronograma semanal
@@ -133,10 +84,10 @@ public class torneoTest {
      * • Ninguno de los personajes participe en otro duelo ese mismo día.
      * • El horario esté entre 08 y 22 inclusive.
      */
-    public static void agregarDuelo(Duelo [][] torneo) {
+    public  void agregarDuelo(Duelo[][] torneo) {
         System.out.print("Ingrese el numero de duelo:");
-        String nroDuelo = sc.nextInt();
-        if () {
+        String nroDuelo = sc.nextLine();
+        if (uTorneo.verificarCodigoUniversal(nroDuelo)) {
             System.out.print("Ingrese codigo primer Personaje: ");
             String p1 = sc.nextLine();
             System.out.print("Ingrese codigo del segundo personaje: ");
@@ -152,7 +103,7 @@ public class torneoTest {
             System.out.print("Ingrese la hora");
             String hora = sc.nextLine();
         }
-        
+
     }
 
     // Este modulo verifica que no exista el duelo
@@ -191,6 +142,6 @@ public class torneoTest {
     }
 
     public void main(String[] args) {
-        cargarTxt();
+        agregarPersonaje(personajes);
     }
 }
