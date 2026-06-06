@@ -17,11 +17,10 @@ public class torneoTest {
 
     // Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
     public void cargarTxt() {
-        CargarDatos cargarDatos = new CargarDatos();
-        cargarDatos.cargarArenas("./Textos/arenas.txt", arenas);
-        cargarDatos.cargarArmas("./Textos/armas.txt", armas);
-        cargarDatos.cargarPersonajes("./Textos/personajes.txt", personajes);
-        cargarDatos.cargarDuelos("./Textos/duelos.txt", torneo, personajes, armas);
+        cDatos.cargarArenas("./Textos/arenas.txt", arenas);
+        cDatos.cargarArmas("./Textos/armas.txt", armas);
+        cDatos.cargarPersonajes("./Textos/personajes.txt", personajes);
+        cDatos.cargarDuelos("./Textos/duelos.txt", torneo, personajes, armas);
 
         for (Duelo[] torneo1 : torneo) {
             for (int j = 0; j < torneo[0].length; j++) {
