@@ -4,6 +4,7 @@ import Tdas.Duelo;
 import Tdas.Personaje;
 import Utils.CargarDatos;
 import Utils.UtilidadesTorneo;
+import Utils.AgregarDueloLogica;
 import java.util.Scanner;
 
 public class torneoTest {
@@ -21,18 +22,6 @@ public class torneoTest {
         cDatos.cargarArmas("./Textos/armas.txt", armas);
         cDatos.cargarPersonajes("./Textos/personajes.txt", personajes);
         cDatos.cargarDuelos("./Textos/duelos.txt", torneo, personajes, armas);
-
-        for (Duelo[] torneo1 : torneo) {
-            for (int j = 0; j < torneo[0].length; j++) {
-                if (torneo1[j] != null && torneo1[j].getPrimerPersonaje() != null) {
-                    System.out.println(torneo1[j].getPrimerPersonaje().getNombre());
-                } else {
-                    System.out.println("null");
-                }
-            }
-            System.out.println();
-        }
-
     }
 
     // 2. Agregar un nuevo personaje
@@ -64,84 +53,220 @@ public class torneoTest {
                 }
                 i++;
             }
-            
-            
+
         } else {
             System.out.println("Codigo invalido!");
-            
+
         }
 
     }
 
     // 3. Agregar un nuevo duelo al cronograma semanal
     /*
-     * • El número de duelo no esté repetido.
-     * • Los personajes existan.
-     * • Los personajes sean diferentes.
+     * • El número de duelo no esté repetido. a
+     * • Los personajes existan. a
+     * • Los personajes sean diferentes. a
      * • Las armas existan.
      * • La arena exista.
-     * • El día y horario estén disponibles.
-     * • Ninguno de los personajes participe en otro duelo ese mismo día.
-     * • El horario esté entre 08 y 22 inclusive.
+     * • El día y horario estén disponibles.a
+     * • Ninguno de los personajes participe en otro duelo ese mismo día.a
+     * • El horario esté entre 08 y 22 inclusive. a
      */
-    public  void agregarDuelo(Duelo[][] torneo) {
-        System.out.print("Ingrese el numero de duelo:");
-        String nroDuelo = sc.nextLine();
-        if (uTorneo.verificarCodigoUniversal(nroDuelo)) {
-            System.out.print("Ingrese codigo primer Personaje: ");
-            String p1 = sc.nextLine();
-            System.out.print("Ingrese codigo del segundo personaje: ");
-            String p2 = sc.nextLine();
-            System.out.print("Ingrese el codigo del primer arma: ");
-            String a1 = sc.nextLine();
-            System.out.print("Ingrese el codigo del segundo arma: ");
-            String a2 = sc.nextLine();
-            System.out.print("Ingrese la arena: ");
-            String nomArena = sc.nextLine();
-            System.out.println("Ingrese el dia: ");
-            String dia = sc.nextLine();
-            System.out.print("Ingrese la hora");
-            String hora = sc.nextLine();
+    public void agregarDuelo(Duelo[][] torneo) {
+        AgregarDueloLogica adLogica = new AgregarDueloLogica();
+
+        String nroDuelo = adLogica.leerCodigoDuelo(torneo);
+
+        String dia = adLogica.leerDia();
+        String hora = adLogica.leerHora();
+
+        int filDia = uTorneo.diaAfila(dia);
+        int colHora = Integer.parseInt(hora) - 8;
+
+        Personaje[] pjs = adLogica.leerPersonajes(torneo, personajes, filDia);
+        Arma[] armasDuelo = adLogica.leerArmas(armas);
+        Arena arena = adLogica.leerArena(arenas);
+
+        torneo[filDia][colHora] = new Duelo(
+                nroDuelo,
+                pjs[0],
+                pjs[1],
+                armasDuelo[0],
+                armasDuelo[1],
+                arena.getNombreArena(),
+                dia,
+                hora,
+                "programado");
+    }
+
+    // 4. Marcar un duelo como realizado
+    public void marcaDueloRealizado(Duelo[][] matriz) {
+        System.out.print("Ingrese el codigo del duelo realizado: ");
+        String idDuelo = sc.nextLine();
+        System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
+        String pGanador = sc.nextLine();
+        if (uTorneo.verificarCodigoUniversal(idDuelo)) {
+            Duelo due = uTorneo.buscarDuelo(idDuelo, matriz);
+            if (due.getEstado().equals("programado")) {
+                due.setEstado("realizado");
+                Personaje perdedor = due.getPrimerPersonaje();
+                perdedor.sumaDerrotas();// • Se debe actualizar la cantidad de duelos perdidos del perdedor.
+                Personaje ganador = due.getPrimerPersonaje();
+                ganador.sumaVictoria();// Se debe actualizar la cantidad de duelos ganados del ganador.
+
+                System.out.println(due.toString());
+            } else {
+                System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
+                                                                                  // realizado un duelo que ya fue
+                                                                                  // realizado.
+            }
+
         }
 
     }
 
-    // Este modulo verifica que no exista el duelo
-    public static boolean verificarDuelo(String nroDuelo, String dia, String hora) {
-        boolean flag = true;
-
-        return flag;
+    // 5. Calcular en forma recursiva la cantidad total de duelos realizados
+    public static void cantDueloRealizados(Duelo[][] duelo) {
+        System.out.println("La cantidad de duelos REALIZADOS: " + duelosRealizados(duelo, 0, 0));
     }
 
-    public static void funcion4() {
+    // Metodo recursivo
+    public static int duelosRealizados(Duelo[][] duelo, int fil, int col) {
+        int contador = 0;
+        if (fil == duelo.length) {// Cuando fil==largo de fila, col=0
+            contador = 0;
+        } else if (col == duelo[fil].length) {
+            contador = duelosRealizados(duelo, fil + 1, 0);
+        } else {
+            if (duelo[fil][col] != null && duelo[fil][col].getEstado().equals("realizado")) {
+                contador = 1 + duelosRealizados(duelo, fil, col + 1);
+            } else {
+                contador = duelosRealizados(duelo, fil, col + 1);
+            }
+        }
+
+        return contador;
+    }
+
+    // 6. Mostrar los duelos de un día ordenados por poder total de combate
+    // (Preguntar)
+    public static void ordenarCombatesDia(Duelo[][] duelo) {
 
     }
 
-    public static void funcion5() {
+    // 7. Mostrar los datos de un personaje dado (Lo hace Lucas)
+    public void mostrarPersonaje(Personaje[] personajes) {
+        System.out.print("Ingrese el codigo del personaje a visualizar: ");
+        String idP = sc.nextLine();
 
+        if (uTorneo.verificarCodigoUniversal(idP)) {
+            Personaje pj = uTorneo.buscarPersonaje(idP, personajes);
+            if (pj != null) {
+                System.out.println(pj.toString());
+            } else {
+                System.out.println("No existe el personaje");
+            }
+        } else {
+            System.out.println("Codigo Invalido");
+        }
     }
 
-    public static void funcion6() {
-
-    }
-
-    public static void funcion7() {
-
-    }
-
+    // 8. Obtener en un arreglo los duelos cuyo poder total está dentro de ese rango
+    // (Lo hace Lucas 8 a 10)
     public static void funcion8() {
 
     }
 
+    // 9. Calcular recursivamente la cantidad de horarios (Lo hace Lucas)
     public static void funcion9() {
 
     }
 
+    // 10. Mostrar para cada día el primer duelo con arma mágica (Lo hace Lucas)
     public static void funcion10() {
 
     }
 
+    public void menu() {
+        int opcion = -1;
+        System.out.println("========================================================");
+        System.out.println("                SISTEMA DE TORNEOS RPG                  ");
+        System.out.println("========================================================");
+        System.out.println(" 1. Agregar Personaje");
+        System.out.println(" 2. Agregar Duelo");
+        System.out.println(" 3. Marcar Duelo Realizado");
+        System.out.println(" 4. Cantidad de Duelos Realizados (Recursivo)");
+        System.out.println(" 5. Mostrar Duelos del Día (Ordenados por Poder)");
+        System.out.println(" 6. Mostrar Estadísticas de Personaje");
+        System.out.println(" 7. Duelos Dentro de Rango de Poder");
+        System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
+        System.out.println("9. Mostrar Primer Día con Arma Mágica");
+        System.out.println("--------------------------------------------------------");
+        System.out.println(" 0. Salir del Programa");
+        System.out.println("========================================================");
+        do {
+            System.out.print("Ingrese un opcion: ");
+            opcion = sc.nextInt();
+            System.out.println();
+            if (opcion >= 0 && opcion <= 9) {
+                switch (opcion) {
+                    case 1:
+                        agregarPersonaje(personajes);// agregarPersonaje();
+                        break;
+
+                    case 2:
+                        agregarDuelo(torneo);
+                        // agregarDuelo();
+                        break;
+
+                    case 3:
+                        marcaDueloRealizado(torneo);
+                        // marcarDueloRealizado();
+                        break;
+
+                    case 4:
+                        cantDueloRealizados(torneo);
+                        // duelosRealizados(matrizTorneo, 0, 0);
+                        break;
+
+                    case 5:
+                        // mostrarDuelosDia();
+                        break;
+
+                    case 6:
+                        mostrarPersonaje(personajes);
+                        // mostrarEstadisticasPersonaje();
+                        break;
+
+                    case 7:
+                        // duelosDentroRango();
+                        break;
+
+                    case 8:
+                        // recurCantHorariosLibres(matrizTorneo, 0, 0);
+                        break;
+
+                    case 9:
+                        // mostrarPrimerDiaArmaMagica();
+                        break;
+
+                    case 0:
+                        System.out.println("Saliendo del programa...");
+                        break;
+
+                    default:
+                        System.out.println("Opción inválida.");
+                        break;
+                }
+            } else {
+                System.out.println("Opcion invalida!");
+            }
+
+        } while (opcion == 0);
+    }
+
     public void main(String[] args) {
-        agregarPersonaje(personajes);
+        cargarTxt();
+        menu();
     }
 }
