@@ -6,11 +6,12 @@ public class Arena {
     private String reino;
     private int cantEspectadores;
     private int nivelDificultad;
-    
-    //Constructores
+
+    // Constructores
     public Arena(String idArena) {
         this.idArena = idArena;
     }
+
     public Arena(String idArena, String nombreArena, String reino, int cantEspectadores, int nivelDificultad) {
         this.idArena = idArena;
         this.nombreArena = nombreArena;
@@ -19,42 +20,50 @@ public class Arena {
         this.nivelDificultad = nivelDificultad;
     }
 
-    //Observadores
+    // Observadores
     public String getIdArena() {
         return idArena;
     }
+
     public String getNombreArena() {
         return nombreArena;
     }
+
     public String getReino() {
         return reino;
     }
+
     public int getCantEspectadores() {
         return cantEspectadores;
     }
+
     public int getNivelDificultad() {
         return nivelDificultad;
     }
+
     @Override
     public String toString() {
         return "Arena [idArena=" + idArena + ", nombreArena=" + nombreArena + ", reino=" + reino + ", cantEspectadores="
                 + cantEspectadores + ", nivelDificultad=" + nivelDificultad + "]";
     }
-    
-    //Modificadores
+
+    // Modificadores
     public void setNombreArena(String nombreArena) {
         this.nombreArena = nombreArena;
     }
+
     public void setReino(String reino) {
         this.reino = reino;
     }
+
     public void setCantEspectadores(int cantEspectadores) {
         this.cantEspectadores = cantEspectadores;
     }
+
     public void setNivelDificultad(int nivelDificultad) {
         this.nivelDificultad = nivelDificultad;
     }
 
-    //Propias Del Tipo
-    
+    // Propias Del Tipo
+
 }
