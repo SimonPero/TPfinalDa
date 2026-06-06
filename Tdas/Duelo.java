@@ -1,7 +1,7 @@
 package Tdas;
 
 public class Duelo {
-    private int nroDuelo;
+    private String nroDuelo;
     private Personaje primerPersonaje;
     private Personaje segundoPersonaje;
     private Arma armaPrimerPersonaje;
@@ -12,10 +12,10 @@ public class Duelo {
     private String estado; //(programado/realizado)    
 
     //Constructores
-    public Duelo (int nroDuelo){
+    public Duelo (String nroDuelo){
         this.nroDuelo = nroDuelo;
     }
-    public Duelo (int nroDuelo, Personaje p1, Personaje p2, Arma a1, Arma a2, String arena, String dia, String hora, String estado){
+    public Duelo (String nroDuelo, Personaje p1, Personaje p2, Arma a1, Arma a2, String arena, String dia, String hora, String estado){
         this.nroDuelo = nroDuelo;
         this.primerPersonaje = p1;
         this.segundoPersonaje = p2;
@@ -29,7 +29,7 @@ public class Duelo {
     
 
     //Observadores
-    public int getNroDuelo() {
+    public String getNroDuelo() {
         return nroDuelo;
     }
     public Personaje getPrimerPersonaje() {
@@ -65,7 +65,7 @@ public class Duelo {
     }
 
     //Modificadores
-    public void setNroDuelo(int nroDuelo) {
+    public void setNroDuelo(String nroDuelo) {
         this.nroDuelo = nroDuelo;
     }
     public void setPrimerPersonaje(Personaje primerPersonaje) {
