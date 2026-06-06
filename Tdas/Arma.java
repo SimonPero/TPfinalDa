@@ -1,18 +1,18 @@
 package Tdas;
 
 public class Arma {
-    private String id;
+    private String idArma;
     private String nombre;
     private String tipoArma;
     private int poder;
     private boolean esMagica;
     
     //Constructores
-    public Arma(String id) {
-        this.id = id;
+    public Arma(String idArma) {
+        this.idArma = idArma;
     }
-    public Arma(String id, String nombre, String tipoArma, int poder, boolean esMagica) {
-        this.id = id;
+    public Arma(String idArma, String nombre, String tipoArma, int poder, boolean esMagica) {
+        this.idArma = idArma;
         this.nombre = nombre;
         this.tipoArma = tipoArma;
         this.poder = poder;
@@ -20,8 +20,8 @@ public class Arma {
     }
     
     //Observadores
-    public String getId() {
-        return id;
+    public String getIdArma() {
+        return idArma;
     }
     public String getNombre() {
         return nombre;
@@ -37,13 +37,13 @@ public class Arma {
     }
     @Override
     public String toString() {
-        return "Arma [id=" + id + ", nombre=" + nombre + ", tipoArma=" + tipoArma + ", poder=" + poder + ", esMagica="
+        return "Arma [id=" + idArma + ", nombre=" + nombre + ", tipoArma=" + tipoArma + ", poder=" + poder + ", esMagica="
                 + esMagica + "]";
     }
    
     //Modificadores
-     public void setId(String id) {
-        this.id = id;
+     public void setId(String idArma) {
+        this.idArma = idArma;
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -59,5 +59,7 @@ public class Arma {
     }
     
     //Propias Del Tipo
-    
+    public boolean equals(Arma otrArma){
+        return this.idArma.equals(otrArma.getIdArma());
+    }
 }
