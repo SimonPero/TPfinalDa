@@ -2,9 +2,9 @@ import Tdas.Arena;
 import Tdas.Arma;
 import Tdas.Duelo;
 import Tdas.Personaje;
+import Utils.AgregarDueloLogica;
 import Utils.CargarDatos;
 import Utils.UtilidadesTorneo;
-import Utils.AgregarDueloLogica;
 import java.util.Scanner;
 
 public class torneoTest {
@@ -126,26 +126,8 @@ public class torneoTest {
     }
 
     // 5. Calcular en forma recursiva la cantidad total de duelos realizados
-    public static void cantDueloRealizados(Duelo[][] duelo) {
-        System.out.println("La cantidad de duelos REALIZADOS: " + duelosRealizados(duelo, 0, 0));
-    }
-
-    // Metodo recursivo
-    public static int duelosRealizados(Duelo[][] duelo, int fil, int col) {
-        int contador = 0;
-        if (fil == duelo.length) {// Cuando fil==largo de fila, col=0
-            contador = 0;
-        } else if (col == duelo[fil].length) {
-            contador = duelosRealizados(duelo, fil + 1, 0);
-        } else {
-            if (duelo[fil][col] != null && duelo[fil][col].getEstado().equals("realizado")) {
-                contador = 1 + duelosRealizados(duelo, fil, col + 1);
-            } else {
-                contador = duelosRealizados(duelo, fil, col + 1);
-            }
-        }
-
-        return contador;
+    public void cantDueloRealizados(Duelo[][] duelo) {
+        System.out.println("La cantidad de duelos REALIZADOS: " + uTorneo.duelosRealizados(duelo, 0, 0));
     }
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
