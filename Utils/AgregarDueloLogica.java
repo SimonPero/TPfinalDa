@@ -1,32 +1,35 @@
 package Utils;
 
-import java.util.Scanner;
-import Tdas.Arma;
-import Tdas.Personaje;
-import Tdas.Duelo;
 import Tdas.Arena;
+import Tdas.Arma;
+import Tdas.Duelo;
+import Tdas.Personaje;
+import java.util.Scanner;
 
 /**
- * Este archivo contiene toda la logica utilizada dentro de la funcion
- * agregarDuelo
- * para mantener un archivo principal ordenado
+ * Contiene la lógica auxiliar utilizada por la función agregarDuelo.
+ * Su objetivo es centralizar las validaciones y la lectura de datos
+ * necesarios para crear un nuevo duelo dentro del torneo.
  */
 public class AgregarDueloLogica {
     /**
-     * Inicializamos sc y uTorneo como private, ya que el principal uso
-     * de la clase AgregarDueloLogica es habilitar la logica de la funcion
-     * y queremos evitar usos indebido de la funcion como:
-     * AgregarDueloLogica.sc.nextLine();
-     * AgregarDueloLogica.uTorneo.verificarCodigoUniversal(<variable_string>)
+     * Inicializamos sc y uTorneo como private, ya que el principal uso de
+     * la clase AgregarDueloLogica es habilitar la logica de la funcion y queremos
+     * evitar usos indebidos de la funcion como: * AgregarDueloLogica.sc.nextLine();
+     * 
      */
     private Scanner sc = new Scanner(System.in);
     private UtilidadesTorneo uTorneo = new UtilidadesTorneo();
 
     /**
-     * La funcion leerCodigoDuelo se encarga de resumir el proceso de
-     * verificacion de codigo y que el mismo no sea ya existente
-     * encargandose de permitir infinitos intentos hasta que el usuario
-     * ponga un codigo valido
+     * Solicita un código de duelo y verifica que:
+     * - Tenga un formato válido.
+     * - No exista previamente en el torneo.
+     *
+     * El proceso se repite hasta ingresar un código válido.
+     *
+     * @param torneo Matriz que almacena los duelos del torneo.
+     * @return Código de duelo validado.
      */
     public String leerCodigoDuelo(Duelo[][] torneo) {
 
@@ -34,29 +37,31 @@ public class AgregarDueloLogica {
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese el numero de duelo: ");
             nroDuelo = sc.nextLine();
-            // Verificamos que el codigo sea valido
+
             if (!uTorneo.verificarCodigoUniversal(nroDuelo)) {
                 System.out.println("Codigo invalido");
 
             } else if (uTorneo.buscarDuelo(nroDuelo, torneo) != null) {
-
                 System.out.println("Ya existe un duelo con ese codigo");
 
             } else {
-                // finalizamos el bucle, el input es valido
                 valido = true;
             }
         }
+
         return nroDuelo;
     }
 
     /**
-     * La funcion leerDia se encarga de verificar que el dia ingresado este
-     * escrito igual que los dias de las semanas de lunes a domingo, haciendo
-     * que no se detenga hasta poner un dia valido
+     * Solicita el día en que se realizará el duelo y verifica que
+     * corresponda a uno de los días válidos de la semana.
+     *
+     * El valor ingresado se convierte a minúsculas para reducir
+     * errores de ingreso por parte del usuario.
+     *
+     * @return Día validado en minúsculas.
      */
     public String leerDia() {
 
@@ -64,41 +69,44 @@ public class AgregarDueloLogica {
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese el dia del duelo: ");
-            System.out.print("opciones: lunes, martes, miercoles, jueves, viernes, sabado, domingo");
-            // forzamos a que el input del usuario este en minusculas para minimizar errores
+            System.out.print("opciones: lunes, martes, miercoles, jueves, viernes, sabado, domingo ");
+
             dia = sc.nextLine().toLowerCase();
 
-            // verificamos que el dia sea uno de los permitidos
             if (uTorneo.diaAfila(dia) != -1) {
-                // finalizamos el bucle, el input es valido
                 valido = true;
             } else {
                 System.out.println("Dia invalido");
             }
         }
+
         return dia;
     }
 
+    /**
+     * Solicita la hora del duelo y verifica que se encuentre
+     * dentro del rango permitido (08 a 22 horas inclusive).
+     *
+     * La hora se devuelve con dos dígitos para mantener el formato
+     * utilizado por los objetos Duelo.
+     *
+     * @return Hora validada en formato "HH".
+     */
     public String leerHora() {
 
         String horaReal = null;
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese la hora (8-22): ");
             int hora = sc.nextInt();
             sc.nextLine();
 
             if (hora >= 8 && hora <= 22) {
-
                 horaReal = String.format("%02d", hora);
-                // hacemos que horaReal respete el formato de la hora dentro
-                // de los Elementos tipo Duelo
                 valido = true;
-                // finalizamos el bucle, el input es valido
+
             } else {
 
                 System.out.println("Hora invalida");
@@ -108,6 +116,21 @@ public class AgregarDueloLogica {
         return horaReal;
     }
 
+    /**
+     * Solicita los dos personajes que participarán del duelo y verifica:
+     * - Que ambos existan.
+     * - Que sean distintos.
+     * - Que ninguno participe en otro duelo el mismo día.
+     *
+     * El proceso se repite hasta obtener una combinación válida.
+     *
+     * @param torneo     Matriz de duelos del torneo.
+     * @param personajes Arreglo de personajes disponibles.
+     * @param filDia     Fila correspondiente al día seleccionado.
+     * @return Arreglo donde:
+     *         res[0] = primer personaje.
+     *         res[1] = segundo personaje.
+     */
     public Personaje[] leerPersonajes(
             Duelo[][] torneo,
             Personaje[] personajes,
@@ -118,7 +141,6 @@ public class AgregarDueloLogica {
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese codigo primer personaje: ");
             String codP1 = sc.nextLine();
 
@@ -130,23 +152,18 @@ public class AgregarDueloLogica {
             Personaje p2 = uTorneo.buscarPersonaje(codP2, personajes);
 
             if (p1 == null) {
-
                 System.out.println("El personaje 1 no existe");
 
             } else if (p2 == null) {
-
                 System.out.println("El personaje 2 no existe");
 
             } else if (p1.equals(p2)) {
-
                 System.out.println("No pueden ser iguales");
 
-            } else if (!uTorneo.pjParticipaDia(p1, filDia, torneo)) {
-
+            } else if (uTorneo.pjParticipaDia(p1, filDia, torneo)) {
                 System.out.println("El personaje 1 ya participa ese dia");
 
-            } else if (!uTorneo.pjParticipaDia(p2, filDia, torneo)) {
-
+            } else if (uTorneo.pjParticipaDia(p2, filDia, torneo)) {
                 System.out.println("El personaje 2 ya participa ese dia");
 
             } else {
@@ -160,14 +177,23 @@ public class AgregarDueloLogica {
         return res;
     }
 
+    /**
+     * Solicita las armas que utilizarán los participantes y verifica
+     * que ambas existan dentro del arreglo de armas disponibles.
+     *
+     * El proceso se repite hasta ingresar dos armas válidas.
+     *
+     * @param armas Arreglo de armas disponibles.
+     * @return Arreglo donde:
+     *         res[0] = arma del primer participante.
+     *         res[1] = arma del segundo participante.
+     */
     public Arma[] leerArmas(Arma[] armas) {
 
         Arma[] res = new Arma[2];
-
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese codigo arma 1: ");
             Arma a1 = uTorneo.buscarArma(sc.nextLine(), armas);
 
@@ -175,15 +201,12 @@ public class AgregarDueloLogica {
             Arma a2 = uTorneo.buscarArma(sc.nextLine(), armas);
 
             if (a1 == null) {
-
                 System.out.println("El arma 1 no existe");
 
             } else if (a2 == null) {
-
                 System.out.println("El arma 2 no existe");
 
             } else {
-
                 res[0] = a1;
                 res[1] = a2;
                 valido = true;
@@ -193,13 +216,21 @@ public class AgregarDueloLogica {
         return res;
     }
 
+    /**
+     * Solicita el código de una arena y verifica que exista
+     * dentro del arreglo de arenas disponibles.
+     *
+     * El proceso se repite hasta ingresar una arena válida.
+     *
+     * @param arenas Arreglo de arenas disponibles.
+     * @return Arena seleccionada.
+     */
     public Arena leerArena(Arena[] arenas) {
 
         Arena arena = null;
         boolean valido = false;
 
         while (!valido) {
-
             System.out.print("Ingrese codigo de arena: ");
             String codArena = sc.nextLine();
 
