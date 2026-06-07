@@ -236,4 +236,21 @@ public class UtilidadesTorneo {
 
         return contador;
     }
+
+    // Metodo recursivo 2
+    public static int horariosLibres(Duelo[][] duelo, int fil, int col) {
+        int contador = 0;
+        if (fil == duelo.length) {
+            contador = 0;
+        } else if (col == duelo[fil].length) {
+            contador = horariosLibres(duelo, fil + 1, 0);
+        } else {
+            if (duelo[fil][col] == null) {
+                contador = 1 + horariosLibres(duelo, fil, col + 1);
+            } else {
+                contador = horariosLibres(duelo, fil, col + 1);
+            }
+        }
+        return contador;
+    }
 }

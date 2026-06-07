@@ -15,7 +15,7 @@ public class torneoTest {
     Arena[] arenas = new Arena[100];
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
-
+     
     // 1. Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
     public void cargarTxt() {
         cDatos.cargarArenas("./Textos/arenas.txt", arenas);
@@ -159,9 +159,10 @@ public class torneoTest {
 
     }
 
-    // 9. Calcular recursivamente la cantidad de horarios (Lo hace Lucas)
-    public static void funcion9() {
+    // 9. Calcular recursivamente la cantidad de horarios
 
+    public static void horarios(Duelo[][] duelo) {
+        System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(duelo, 0, 0));
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica (Lo hace Lucas)
@@ -225,7 +226,7 @@ public class torneoTest {
                         break;
 
                     case 8:
-                        // recurCantHorariosLibres(matrizTorneo, 0, 0);
+                        horarios(torneo);
                         break;
 
                     case 9:
@@ -247,8 +248,10 @@ public class torneoTest {
         } while (opcion == 0);
     }
 
-    public void main(String[] args) {
-        cargarTxt();
-        menu();
+    
+    public static void main(String[] args) {
+        torneoTest test=new torneoTest();
+        test.cargarTxt();
+        test.menu();
     }
 }
