@@ -1,9 +1,9 @@
 package Utils;
 
-import Tdas.Arma;
-import Tdas.Personaje;
-import Tdas.Duelo;
 import Tdas.Arena;
+import Tdas.Arma;
+import Tdas.Duelo;
+import Tdas.Personaje;
 
 public class UtilidadesTorneo {
     public int diaAfila(String dia) {
@@ -101,16 +101,20 @@ public class UtilidadesTorneo {
         return flag;
     }
 
-    //
+    /** 
+     * pjPaticipaDia se encarga de revisar si el personaje
+     * ya participa en algun duelo el dia ingresado.
+     * si participa retorna true, si no retorna false
+     * */ 
     public boolean pjParticipaDia(Personaje pj, int filDia, Duelo[][] torneo) {
-        boolean res = true;
+        boolean res = false;
         int i = 0;
 
         while (i < torneo[filDia].length && res) {
             if (torneo[filDia][i] != null) {
                 if (torneo[filDia][i].getPrimerPersonaje().equals(pj)
                         || torneo[filDia][i].getSegundoPersonaje().equals(pj)) {
-                    res = false;
+                    res = true;
                 }
             }
             i++;
