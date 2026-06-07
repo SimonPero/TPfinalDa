@@ -200,4 +200,40 @@ public class UtilidadesTorneo {
         }
         return res;
     }
+
+    /**
+     * Recorre recursivamente la matriz de duelos y cuenta cuántos
+     * tienen estado "realizado".
+     *
+     * El recorrido se realiza fila por fila hasta procesar todas
+     * las posiciones de la matriz.
+     *
+     * @param duelo Matriz que contiene los duelos del torneo.
+     * @param fil   Fila actual del recorrido.
+     * @param col   Columna actual del recorrido.
+     * @return Cantidad total de duelos realizados.
+     */
+    public int duelosRealizados(Duelo[][] duelo, int fil, int col) {
+        int contador = 0;
+
+        if (fil == duelo.length) {
+            // Caso base: se recorrieron todas las filas de la matriz.
+            contador = 0;
+        } else if (col == duelo[fil].length) {
+            // Se terminó la fila actual, continuamos con la siguiente.
+            contador = duelosRealizados(duelo, fil + 1, 0);
+        } else {
+            if (duelo[fil][col] != null &&
+                    duelo[fil][col].getEstado().equals("realizado")) {
+
+                contador = 1 + duelosRealizados(duelo, fil, col + 1);
+
+            } else {
+
+                contador = duelosRealizados(duelo, fil, col + 1);
+            }
+        }
+
+        return contador;
+    }
 }
