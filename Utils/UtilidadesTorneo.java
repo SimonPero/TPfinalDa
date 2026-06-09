@@ -1,5 +1,9 @@
 package Utils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import Tdas.Arena;
 import Tdas.Arma;
 import Tdas.Duelo;
@@ -238,7 +242,7 @@ public class UtilidadesTorneo {
     }
 
     // Metodo recursivo 2
-    public static int horariosLibres(Duelo[][] duelo, int fil, int col) {
+    public  int horariosLibres(Duelo[][] duelo, int fil, int col) {
         int contador = 0;
         if (fil == duelo.length) {
             contador = 0;
@@ -252,5 +256,39 @@ public class UtilidadesTorneo {
             }
         }
         return contador;
+    }
+    //Este modulo suma el nivel de poder De cada duelo
+    public int calcularPoderTotal (Duelo[][] torneo,int fil, int col){
+        int sumaPoder=0;
+        int Ep1 = torneo[fil][col].getPrimerPersonaje().getNivelEnergiaP();
+        int Ea1 = torneo[fil][col].getArmaPrimerPersonaje().getPoder();
+        int Ep2 = torneo[fil][col].getSegundoPersonaje().getNivelEnergiaP();
+        int Ea2 = torneo[fil][col].getArmaSegundoPersonaje().getPoder();
+        sumaPoder = Ep1 + Ea1 + Ep2 + Ea2;
+        return sumaPoder;
+    }
+
+    //
+   
+    //Este modulo escribe en un archivo .txt
+    public static void guardarEnArchivo(int[] arr, String ordenado) {
+        // Usamos try-with-resources para asegurar que el archivo se cierre
+        // correctamente solo
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ordenado))) {
+
+            // Recorremos el arreglo ya ordenado
+            for (int i = 0; i < arr.length; i++) {
+                // Escribimos el número convertido a texto
+                escritor.write(Integer.toString(arr[i]));
+                // Agregamos un salto de línea para que cada número quede abajo del otro
+                escritor.newLine();
+            }
+
+            System.out.println("¡Datos guardados con éxito en " + ordenado + "!");
+
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al intentar escribir el archivo: " + e.getMessage());
+        }
+
     }
 }
