@@ -15,7 +15,7 @@ public class torneoTest {
     Arena[] arenas = new Arena[100];
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
-     
+
     // 1. Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
     public void cargarTxt() {
         cDatos.cargarArenas("./Textos/arenas.txt", arenas);
@@ -46,7 +46,7 @@ public class torneoTest {
             // Busca el espacio null para cargar a un personaje nuevo
             while (i < personajes.length && !cargado) {
                 if (personajes[i] == null) {
-                    personajes[i] = new Personaje(codigoP, nombre, codigoP, cantDG, cantDP);
+                    personajes[i] = new Personaje(codigoP, nombre, tipo, nivelEnergia, cantDG, cantDP);
                     System.out.println(personajes[i].toString());
                     System.out.println("Personaje cargado con exito!");
                     cargado = true;
@@ -131,12 +131,29 @@ public class torneoTest {
     }
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
-    // (Preguntar)
-    public static void ordenarCombatesDia(Duelo[][] duelo) {
+    // Método principal para iniciar el ordenamiento
+    public void ordenarDia(){
+        //Pedimos al usuario que ingrese el dia a ordenar
+        System.out.print("Ingrese el dia a odernar: ");
+        int col = sc.nextInt();
+        
+        //Algoritmo de ordenamiento(QuickSort)
+    
+        //Guardamos el ordenamiento en un archivo .txt
+        
 
     }
 
-    // 7. Mostrar los datos de un personaje dado (Lo hace Lucas)
+    // Método auxiliar para imprimir el arreglo
+    public static void imprimirArreglo(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+    }
+
+    // 7. Mostrar los datos de un personaje dado
     public void mostrarPersonaje(Personaje[] personajes) {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
         String idP = sc.nextLine();
@@ -161,7 +178,7 @@ public class torneoTest {
 
     // 9. Calcular recursivamente la cantidad de horarios
 
-    public static void horarios(Duelo[][] duelo) {
+    public void horarios(Duelo[][] duelo) {
         System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(duelo, 0, 0));
     }
 
@@ -170,24 +187,28 @@ public class torneoTest {
 
     }
 
+    // Este modulo sirve para escribir y leer las opciones, la cantidad de veces que
+    // el usuario quiera.
     public void menu() {
         int opcion = -1;
-        System.out.println("========================================================");
-        System.out.println("                SISTEMA DE TORNEOS RPG                  ");
-        System.out.println("========================================================");
-        System.out.println(" 1. Agregar Personaje");
-        System.out.println(" 2. Agregar Duelo");
-        System.out.println(" 3. Marcar Duelo Realizado");
-        System.out.println(" 4. Cantidad de Duelos Realizados (Recursivo)");
-        System.out.println(" 5. Mostrar Duelos del Día (Ordenados por Poder)");
-        System.out.println(" 6. Mostrar Estadísticas de Personaje");
-        System.out.println(" 7. Duelos Dentro de Rango de Poder");
-        System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
-        System.out.println("9. Mostrar Primer Día con Arma Mágica");
-        System.out.println("--------------------------------------------------------");
-        System.out.println(" 0. Salir del Programa");
-        System.out.println("========================================================");
-        do {
+        {// Opciones de menu
+            System.out.println("========================================================");
+            System.out.println("                SISTEMA DE TORNEOS RPG                  ");
+            System.out.println("========================================================");
+            System.out.println(" 1. Agregar Personaje");
+            System.out.println(" 2. Agregar Duelo");
+            System.out.println(" 3. Marcar Duelo Realizado");
+            System.out.println(" 4. Cantidad de Duelos Realizados (Recursivo)");
+            System.out.println(" 5. Mostrar Duelos del Día (Ordenados por Poder)");
+            System.out.println(" 6. Mostrar Estadísticas de Personaje");
+            System.out.println(" 7. Duelos Dentro de Rango de Poder");
+            System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
+            System.out.println("9. Mostrar Primer Día con Arma Mágica");
+            System.out.println("--------------------------------------------------------");
+            System.out.println(" 0. Salir del Programa");
+            System.out.println("========================================================");
+        }
+        do {// Repetir la cantidad de veces que el usuario desee
             System.out.print("Ingrese un opcion: ");
             opcion = sc.nextInt();
             System.out.println();
@@ -248,9 +269,8 @@ public class torneoTest {
         } while (opcion == 0);
     }
 
-    
     public static void main(String[] args) {
-        torneoTest test=new torneoTest();
+        torneoTest test = new torneoTest();
         test.cargarTxt();
         test.menu();
     }
