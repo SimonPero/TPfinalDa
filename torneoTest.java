@@ -132,15 +132,18 @@ public class torneoTest {
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
-    public void ordenarDia(){
-        //Pedimos al usuario que ingrese el dia a ordenar
+    public void ordenarDia() {
+        sc.nextLine();
+        // Pedimos al usuario que ingrese el dia a ordenar
         System.out.print("Ingrese el dia a odernar: ");
         String dia = sc.nextLine();
-        int filTorneo = uTorneo.diaAfila(dia);//Convertimos el dia de String a int
+        int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
+        if (filTorneo != -1) {
+            Duelo[] arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
+            uTorneo.quickSort(arrayCopia, 0, filTorneo);
+            uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
 
-        Duelo []arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
-        uTorneo.quickSort(arrayCopia, filTorneo, filTorneo);
-        uTorneo.guardarEnArchivo(arrayCopia, dia+ " Ordenado");
+        }
     }
 
     // Método auxiliar para imprimir el arreglo
@@ -211,7 +214,7 @@ public class torneoTest {
             System.out.print("Ingrese un opcion: ");
             opcion = sc.nextInt();
             System.out.println();
-            if (opcion >= 0 && opcion <= 9) {
+            if (opcion >= 0 && opcion<=9) {
                 switch (opcion) {
                     case 1:
                         agregarPersonaje(personajes);// agregarPersonaje();
@@ -266,7 +269,7 @@ public class torneoTest {
                 System.out.println("Opcion invalida!");
             }
 
-        } while (opcion == 0);
+        } while (opcion != 0);
     }
 
     public static void main(String[] args) {
