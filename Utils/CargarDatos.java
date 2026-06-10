@@ -110,7 +110,9 @@ public class CargarDatos {
                         datos[1],
                         datos[2],
                         Integer.parseInt(datos[3]),
-                        Integer.parseInt(datos[4]));
+                        Integer.parseInt(datos[4]),
+                        Integer.parseInt(datos[5]));
+                        ;
 
                 i++;
             }
