@@ -135,13 +135,12 @@ public class torneoTest {
     public void ordenarDia(){
         //Pedimos al usuario que ingrese el dia a ordenar
         System.out.print("Ingrese el dia a odernar: ");
-        int col = sc.nextInt();
-        
-        //Algoritmo de ordenamiento(QuickSort)
-    
-        //Guardamos el ordenamiento en un archivo .txt
-        
+        String dia = sc.nextLine();
+        int filTorneo = uTorneo.diaAfila(dia);//Convertimos el dia de String a int
 
+        Duelo []arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
+        uTorneo.quickSort(arrayCopia, filTorneo, filTorneo);
+        uTorneo.guardarEnArchivo(arrayCopia, dia+ " Ordenado");
     }
 
     // Método auxiliar para imprimir el arreglo
@@ -234,6 +233,7 @@ public class torneoTest {
                         break;
 
                     case 5:
+                        ordenarDia();
                         // mostrarDuelosDia();
                         break;
 
