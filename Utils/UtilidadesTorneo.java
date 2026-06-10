@@ -301,13 +301,13 @@ public class UtilidadesTorneo {
 
         int i = ini - 1;
 
-        for (int j = ini; j < ini; j++) {
+        for (int j = ini; j < fin; j++) {
             if (calcularPoderTotal(fila[j]) > poderPivote) {
                 i++;
 
                 Duelo temp = fila[i];
                 fila[i] = fila[j];
-                fila[j] = fila[i];
+                fila[j] = temp;
             }
         }
         Duelo temp = fila[i + 1];
@@ -341,14 +341,24 @@ public class UtilidadesTorneo {
                     int poderTotal = calcularPoderTotal(arr[i]);
                     {// Elegimos todos los atributos para escribir en el archivo
                         escritor.write("Nro Duelo: " + d.getNroDuelo());
+                        escritor.write(" | ");
                         escritor.write("1er Personaje: " + d.getPrimerPersonaje());
+                        escritor.write(" | ");
                         escritor.write("2do Personaje: " + d.getSegundoPersonaje());
+                        escritor.write(" | ");
                         escritor.write("1er Arma: " + d.getArmaPrimerPersonaje());
+                        escritor.write(" | ");
                         escritor.write("2do Arma: " + d.getArmaSegundoPersonaje());
+                        escritor.write(" | ");
                         escritor.write("Arena:  " + d.getArena());
+                        escritor.write(" | ");
                         escritor.write("Dia: " + d.getDia());
+                        escritor.write(" | ");
                         escritor.write("Hora: " + d.getHora());
+                        escritor.write(" | ");
                         escritor.write("Estado: " + d.getEstado());
+                        escritor.newLine();
+                        escritor.newLine();
                     }
                     escritor.write(" >> ENERGÍA TOTAL DEL DUELO (CON ARMAS): " + poderTotal);
                     escritor.newLine();
@@ -360,6 +370,9 @@ public class UtilidadesTorneo {
             }
 
             System.out.println("¡Datos guardados con éxito en " + ordenado + "!");
+            System.out.println();
+            System.out.println("========================================================");
+            System.out.println();
 
         } catch (IOException e) {
             System.out.println("Ocurrió un error al intentar escribir el archivo: " + e.getMessage());
