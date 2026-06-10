@@ -242,7 +242,7 @@ public class UtilidadesTorneo {
     }
 
     // Metodo recursivo 2
-    public  int horariosLibres(Duelo[][] duelo, int fil, int col) {
+    public int horariosLibres(Duelo[][] duelo, int fil, int col) {
         int contador = 0;
         if (fil == duelo.length) {
             contador = 0;
@@ -257,31 +257,106 @@ public class UtilidadesTorneo {
         }
         return contador;
     }
-    //Este modulo suma el nivel de poder De cada duelo
-    public int calcularPoderTotal (Duelo[][] torneo,int fil, int col){
-        int sumaPoder=0;
-        int Ep1 = torneo[fil][col].getPrimerPersonaje().getNivelEnergiaP();
-        int Ea1 = torneo[fil][col].getArmaPrimerPersonaje().getPoder();
-        int Ep2 = torneo[fil][col].getSegundoPersonaje().getNivelEnergiaP();
-        int Ea2 = torneo[fil][col].getArmaSegundoPersonaje().getPoder();
-        sumaPoder = Ep1 + Ea1 + Ep2 + Ea2;
+
+    // Este modulo suma el nivel de poder De cada duelo
+    public int calcularPoderTotal(Duelo torneo) {
+        int sumaPoder = 0;
+        if (torneo != null) {
+            int Ep1 = torneo.getPrimerPersonaje().getNivelEnergiaP();
+            int Ea1 = torneo.getArmaPrimerPersonaje().getPoder();
+            int Ep2 = torneo.getSegundoPersonaje().getNivelEnergiaP();
+            int Ea2 = torneo.getArmaSegundoPersonaje().getPoder();
+            sumaPoder = Ep1 + Ea1 + Ep2 + Ea2;
+        }
         return sumaPoder;
     }
 
-    //
-   
-    //Este modulo escribe en un archivo .txt
-    public static void guardarEnArchivo(int[] arr, String ordenado) {
+    public Duelo[] obternerFilaOrdenada(Duelo[][] torneo, int diaEleg) {
+        // Buscamos la fila original
+        Duelo[] filaOriginal = torneo[diaEleg];
+        // Creamos un nuevo arreglo del mismo tamaño y copiamos los elementos para
+        // clonar el dia elegido
+        Duelo[] filaCopia = new Duelo[filaOriginal.length];
+        System.arraycopy(filaOriginal, 0, filaCopia, 0, filaOriginal.length);
+        // Ordenamos el arreglo nuevo
+        quickSort(filaCopia, 0, filaCopia.length - 1);
+        // Retornamos el dia ordenado en una copia
+        return filaCopia;
+    }
+
+    // Metodo de ordenamiento Quick Sort
+    public void quickSort(Duelo[] fila, int ini, int fin) {
+        if (ini < fin) {
+            int indice = particion(fila, ini, fin);
+            // Llamada recursiva
+            quickSort(fila, ini, indice - 1);
+            quickSort(fila, indice + 1, fin);
+        }
+    }
+
+    // Metodo de particion que usa QuickSort
+    private int particion(Duelo[] fila, int ini, int fin) {
+        Duelo pivote = fila[fin];
+        int poderPivote = calcularPoderTotal(pivote);
+
+        int i = ini - 1;
+
+        for (int j = ini; j < ini; j++) {
+            if (calcularPoderTotal(fila[j]) > poderPivote) {
+                i++;
+
+                Duelo temp = fila[i];
+                fila[i] = fila[j];
+                fila[j] = fila[i];
+            }
+        }
+        Duelo temp = fila[i + 1];
+        fila[i + 1] = fila[fin];
+        fila[fin] = temp;
+
+        return i + 1;
+    }
+
+    // Este modulo escribe en un archivo .txt
+    public void guardarEnArchivo(Duelo[] arr, String ordenado) {
         // Usamos try-with-resources para asegurar que el archivo se cierre
         // correctamente solo
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ordenado))) {
-
+            escritor.write("=================================================================");
+            escritor.newLine();
+            escritor.write("--- DUELOS ORDENADOR POR PODER TOTAL");
+            escritor.newLine();
+            escritor.write("=================================================================");
+            if (arr.length>0 && arr[0]!=null) {
+                escritor.write("Dia del Torneo: "+arr[0].getDia());
+                escritor.newLine();
+                escritor.write("-----------------------------------------------------------------");
+                escritor.newLine();
+            }
             // Recorremos el arreglo ya ordenado
             for (int i = 0; i < arr.length; i++) {
-                // Escribimos el número convertido a texto
-                escritor.write(Integer.toString(arr[i]));
-                // Agregamos un salto de línea para que cada número quede abajo del otro
-                escritor.newLine();
+                Duelo d = arr[i];
+
+                if (d != null) {
+                    int poderTotal = calcularPoderTotal(arr[i]);
+                    {// Elegimos todos los atributos para escribir en el archivo
+                        escritor.write("Nro Duelo: " + d.getNroDuelo());
+                        escritor.write("1er Personaje: " + d.getPrimerPersonaje());
+                        escritor.write("2do Personaje: " + d.getSegundoPersonaje());
+                        escritor.write("1er Arma: " + d.getArmaPrimerPersonaje());
+                        escritor.write("2do Arma: " + d.getArmaSegundoPersonaje());
+                        escritor.write("Arena:  " + d.getArena());
+                        escritor.write("Dia: " + d.getDia());
+                        escritor.write("Hora: " + d.getHora());
+                        escritor.write("Estado: " + d.getEstado());
+                    }
+                    escritor.write(" >> ENERGÍA TOTAL DEL DUELO (CON ARMAS): " + poderTotal);
+                    escritor.newLine();
+                    escritor.write("-----------------------------------------------------------------");
+                    escritor.newLine();
+
+                }
+
             }
 
             System.out.println("¡Datos guardados con éxito en " + ordenado + "!");
