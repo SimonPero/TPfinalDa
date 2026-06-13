@@ -37,7 +37,7 @@ public class Arma {
         return poder;
     }
 
-    public boolean isEsMagica() {
+    public boolean getEsMagica() {
         return esMagica;
     }
 
