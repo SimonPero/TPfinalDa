@@ -259,13 +259,13 @@ public class UtilidadesTorneo {
     }
 
     // Este modulo suma el nivel de poder De cada duelo
-    public int calcularPoderTotal(Duelo torneo) {
+    public int calcularPoderTotal(Duelo duelo) {
         int sumaPoder = 0;
-        if (torneo != null) {
-            int Ep1 = torneo.getPrimerPersonaje().getNivelEnergiaP();
-            int Ea1 = torneo.getArmaPrimerPersonaje().getPoder();
-            int Ep2 = torneo.getSegundoPersonaje().getNivelEnergiaP();
-            int Ea2 = torneo.getArmaSegundoPersonaje().getPoder();
+        if (duelo != null) {
+            int Ep1 = duelo.getPrimerPersonaje().getNivelEnergiaP();
+            int Ea1 = duelo.getArmaPrimerPersonaje().getPoder();
+            int Ep2 = duelo.getSegundoPersonaje().getNivelEnergiaP();
+            int Ea2 = duelo.getArmaSegundoPersonaje().getPoder();
             sumaPoder = Ep1 + Ea1 + Ep2 + Ea2;
         }
         return sumaPoder;
