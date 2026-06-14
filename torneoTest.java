@@ -135,7 +135,7 @@ public class torneoTest {
     public void ordenarDia() {
         sc.nextLine();
         // Pedimos al usuario que ingrese el dia a ordenar
-        System.out.print("Ingrese el dia a odernar: ");
+        System.out.print("Ingrese el dia a ordenar: ");
         String dia = sc.nextLine();
         int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
         if (filTorneo != -1) {
@@ -173,9 +173,23 @@ public class torneoTest {
     }
 
     // 8. Obtener en un arreglo los duelos cuyo poder total está dentro de ese rango
-    // (Lo hace Lucas 8 a 10)
-    public static void funcion8() {
-
+    public Duelo[] mostrarDuelosRangos() {
+        Duelo[] dueloRango = new Duelo[105];
+        int ac = 0;
+        System.out.println("Ingrese el mínimo para calcular el rango ");
+        int rangoMin = sc.nextInt();
+        System.out.println("Ingrese el máximo para calcular el rango ");
+        int rangoMax = sc.nextInt();
+        for (int i = 0; i < torneo.length; i++) {
+            for (int j = 0; j < torneo[0].length; j++) {
+                int poderT = uTorneo.calcularPoderTotal(torneo[i][j]);
+                if (poderT >= rangoMin && poderT <= rangoMax) {
+                    dueloRango[ac] = torneo[i][j];
+                    ac++;
+                }
+            }
+        }
+        return dueloRango;
     }
 
     // 9. Calcular recursivamente la cantidad de horarios
@@ -185,7 +199,7 @@ public class torneoTest {
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica (Lo hace Lucas)
-    public static void funcion10() {
+    public static void mostrarDueloMagia() {
 
     }
 
@@ -214,7 +228,7 @@ public class torneoTest {
             System.out.print("Ingrese un opcion: ");
             opcion = sc.nextInt();
             System.out.println();
-            if (opcion >= 0 && opcion<=9) {
+            if (opcion >= 0 && opcion <= 9) {
                 switch (opcion) {
                     case 1:
                         agregarPersonaje(personajes);// agregarPersonaje();
@@ -246,6 +260,11 @@ public class torneoTest {
                         break;
 
                     case 7:
+                        Duelo[] arr = mostrarDuelosRangos();
+                        System.out.println(arr[0]);
+                        for (int i = 0; i < arr.length && arr[i] != null; i++) {
+                            System.out.println(arr[i]);
+                        }
                         // duelosDentroRango();
                         break;
 
