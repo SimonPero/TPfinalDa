@@ -140,7 +140,6 @@ public class torneoTest {
         int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
         if (filTorneo != -1) {
             Duelo[] arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
-            uTorneo.quickSort(arrayCopia, 0, filTorneo);
             uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
 
         }
@@ -200,30 +199,32 @@ public class torneoTest {
 
     // 10. Mostrar para cada día el primer duelo con arma mágica
     public void mostrarDueloMagia() {
-       boolean flag = true;
-       int i = 0;
-       int j = 0;
-       while (i<torneo.length) {
-        j = 0;
-        flag = true;
-        while (flag && j<torneo[0].length) {
-            if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica() || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
-            flag = false;
-            System.out.println("El primer duelo con un arma mágica del día " +uTorneo.filaADia(i)+ " es a las "+(j+8));  
+        boolean flag = true;
+        int i = 0;
+        int j = 0;
+        while (i < torneo.length) {
+            j = 0;
+            flag = true;
+            while (flag && j < torneo[0].length) {
+                if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica()
+                        || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
+                    flag = false;
+                    System.out.println("El primer duelo con un arma mágica del día " + uTorneo.filaADia(i)
+                            + " es a las " + (j + 8));
+                }
+                j++;
             }
-            j++;
+            if (flag) {
+                System.out.println("En el día " + uTorneo.filaADia(i) + " no hay ningún duelo con alguna arma mágica");
+            }
+            i++;
         }
-        if (flag){
-          System.out.println("En el día " +uTorneo.filaADia(i)+ " no hay ningún duelo con alguna arma mágica");
-          }
-        i++;
-       }
     }
 
     // Este modulo sirve para escribir y leer las opciones, la cantidad de veces que
     // el usuario quiera.
     public void menu() {
-        int opcion = -1;
+        int opcion;
         {// Opciones de menu
             System.out.println("========================================================");
             System.out.println("                SISTEMA DE TORNEOS RPG                  ");
