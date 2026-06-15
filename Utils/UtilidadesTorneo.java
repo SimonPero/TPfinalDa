@@ -1,13 +1,12 @@
 package Utils;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import Tdas.Arena;
 import Tdas.Arma;
 import Tdas.Duelo;
 import Tdas.Personaje;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Contiene funciones auxiliares de búsqueda, validación y conversión
@@ -41,7 +40,8 @@ public class UtilidadesTorneo {
      * correspondiente dentro de la matriz de duelos.
      *
      * @param dia Día de la semana.
-     * @return string asociado a la fila correspondiente o el resultado inválido "error"
+     * @return string asociado a la fila correspondiente o el resultado inválido
+     *         "error"
      */
     public String filaADia(int dia) {
         String res = "error";
@@ -293,15 +293,21 @@ public class UtilidadesTorneo {
     }
 
     public Duelo[] obternerFilaOrdenada(Duelo[][] torneo, int diaEleg) {
-        // Buscamos la fila original
+        // Obtenemos la fila original
         Duelo[] filaOriginal = torneo[diaEleg];
-        // Creamos un nuevo arreglo del mismo tamaño y copiamos los elementos para
-        // clonar el dia elegido
+
+        // Creamos una copia del arreglo
         Duelo[] filaCopia = new Duelo[filaOriginal.length];
-        System.arraycopy(filaOriginal, 0, filaCopia, 0, filaOriginal.length);
-        // Ordenamos el arreglo nuevo
+
+        // Copiamos las referencias una por una
+        for (int i = 0; i < filaOriginal.length; i++) {
+            filaCopia[i] = filaOriginal[i];
+        }
+
+        // Ordenamos la copia
         quickSort(filaCopia, 0, filaCopia.length - 1);
-        // Retornamos el dia ordenado en una copia
+
+        // Retornamos la copia ordenada
         return filaCopia;
     }
 
@@ -317,21 +323,26 @@ public class UtilidadesTorneo {
 
     // Metodo de particion que usa QuickSort
     private int particion(Duelo[] fila, int ini, int fin) {
-        Duelo pivote = fila[fin];
-        int poderPivote = calcularPoderTotal(pivote);
+        int medio = (ini + fin) / 2;
+
+        // Llevar el pivote al final
+        Duelo temp = fila[medio];
+        fila[medio] = fila[fin];
+        fila[fin] = temp;
 
         int i = ini - 1;
 
         for (int j = ini; j < fin; j++) {
-            if (calcularPoderTotal(fila[j]) > poderPivote) {
+            if (calcularPoderTotal(fila[j]) > calcularPoderTotal(fila[fin])) {
                 i++;
 
-                Duelo temp = fila[i];
+                temp = fila[i];
                 fila[i] = fila[j];
                 fila[j] = temp;
             }
         }
-        Duelo temp = fila[i + 1];
+
+        temp = fila[i + 1];
         fila[i + 1] = fila[fin];
         fila[fin] = temp;
 
