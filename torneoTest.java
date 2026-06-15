@@ -198,9 +198,26 @@ public class torneoTest {
         System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(duelo, 0, 0));
     }
 
-    // 10. Mostrar para cada día el primer duelo con arma mágica (Lo hace Lucas)
-    public static void mostrarDueloMagia() {
-
+    // 10. Mostrar para cada día el primer duelo con arma mágica
+    public void mostrarDueloMagia() {
+       boolean flag = true;
+       int i = 0;
+       int j = 0;
+       while (i<torneo.length) {
+        j = 0;
+        flag = true;
+        while (flag && j<torneo[0].length) {
+            if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica() || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
+            flag = false;
+            System.out.println("El primer duelo con un arma mágica del día " +uTorneo.filaADia(i)+ " es a las "+(j+8));  
+            }
+            j++;
+        }
+        if (flag){
+          System.out.println("En el día " +uTorneo.filaADia(i)+ " no hay ningún duelo con alguna arma mágica");
+          }
+        i++;
+       }
     }
 
     // Este modulo sirve para escribir y leer las opciones, la cantidad de veces que
@@ -219,7 +236,7 @@ public class torneoTest {
             System.out.println(" 6. Mostrar Estadísticas de Personaje");
             System.out.println(" 7. Duelos Dentro de Rango de Poder");
             System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
-            System.out.println("9. Mostrar Primer Día con Arma Mágica");
+            System.out.println(" 9. Mostrar Primer Día con Arma Mágica");
             System.out.println("--------------------------------------------------------");
             System.out.println(" 0. Salir del Programa");
             System.out.println("========================================================");
@@ -273,6 +290,7 @@ public class torneoTest {
                         break;
 
                     case 9:
+                        mostrarDueloMagia();
                         // mostrarPrimerDiaArmaMagica();
                         break;
 
