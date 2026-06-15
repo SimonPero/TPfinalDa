@@ -47,7 +47,7 @@ public class torneoTest {
             while (i < personajes.length && !cargado) {
                 if (personajes[i] == null) {
                     personajes[i] = new Personaje(codigoP, nombre, tipo, nivelEnergia, cantDG, cantDP);
-                    System.out.println(personajes[i].toString());
+                    System.out.println(personajes[i]);
                     System.out.println("Personaje cargado con exito!");
                     cargado = true;
                 }
@@ -122,7 +122,7 @@ public class torneoTest {
                 } else {
                     System.out.println("El código ingresado no corresponde a ningún personaje de este duelo.");
                 }
-                System.out.println(due.toString());
+                System.out.println(due);
             } else {
                 System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
                                                                                   // realizado un duelo que ya fue
@@ -160,7 +160,7 @@ public class torneoTest {
         if (uTorneo.verificarCodigoUniversal(idP)) {
             Personaje pj = uTorneo.buscarPersonaje(idP, personajes);
             if (pj != null) {
-                System.out.println(pj.toString());
+                System.out.println(pj);
             } else {
                 System.out.println("No existe el personaje");
             }
