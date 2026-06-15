@@ -37,6 +37,27 @@ public class UtilidadesTorneo {
     }
 
     /**
+     * Convierte el número del día de la semana en la fila
+     * correspondiente dentro de la matriz de duelos.
+     *
+     * @param dia Día de la semana.
+     * @return string asociado a la fila correspondiente o el resultado inválido "error"
+     */
+    public String filaADia(int dia) {
+        String res = "error";
+        switch (dia) {
+            case 0 -> res = "Lunes";
+            case 1 -> res = "Martes";
+            case 2 -> res = "Miércoles";
+            case 3 -> res = "Jueves";
+            case 4 -> res = "Viernes";
+            case 5 -> res = "Sábado";
+            case 6 -> res = "Domingo";
+        }
+        return res;
+    }
+
+    /**
      * Busca un duelo dentro de la matriz utilizando su código.
      *
      * La búsqueda finaliza al encontrar el duelo solicitado o al
@@ -327,8 +348,8 @@ public class UtilidadesTorneo {
             escritor.write("--- DUELOS ORDENADOR POR PODER TOTAL");
             escritor.newLine();
             escritor.write("=================================================================");
-            if (arr.length>0 && arr[0]!=null) {
-                escritor.write("Dia del Torneo: "+arr[0].getDia());
+            if (arr.length > 0 && arr[0] != null) {
+                escritor.write("Dia del Torneo: " + arr[0].getDia());
                 escritor.newLine();
                 escritor.write("-----------------------------------------------------------------");
                 escritor.newLine();
