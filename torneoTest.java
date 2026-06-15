@@ -133,7 +133,6 @@ public class torneoTest {
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
     public void ordenarDia() {
-        sc.nextLine();
         // Pedimos al usuario que ingrese el dia a ordenar
         System.out.print("Ingrese el dia a ordenar: ");
         String dia = sc.nextLine();
