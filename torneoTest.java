@@ -103,17 +103,25 @@ public class torneoTest {
     public void marcaDueloRealizado() {
         System.out.print("Ingrese el codigo del duelo realizado: ");
         String idDuelo = sc.nextLine();
-        System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
-        String pGanador = sc.nextLine();
         if (uTorneo.verificarCodigoUniversal(idDuelo)) {
             Duelo due = uTorneo.buscarDuelo(idDuelo, torneo);
             if (due.getEstado().equals("programado")) {
                 due.setEstado("realizado");
-                Personaje perdedor = due.getPrimerPersonaje();
-                perdedor.sumaDerrotas();// • Se debe actualizar la cantidad de duelos perdidos del perdedor.
-                Personaje ganador = due.getPrimerPersonaje();
-                ganador.sumaVictoria();// Se debe actualizar la cantidad de duelos ganados del ganador.
 
+                System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
+                String pGanador = sc.nextLine();
+
+                Personaje p1 = due.getPrimerPersonaje();
+                Personaje p2 = due.getSegundoPersonaje();
+                if (p1.getId().equals(pGanador)) {// Se debe actualizar la cantidad de duelos ganados del ganador.
+                    p1.sumaVictoria(); // • Se debe actualizar la cantidad de duelos perdidos del perdedor.
+                    p2.sumaDerrotas();
+                } else if (p2.getId().equals(pGanador)) {
+                    p2.sumaVictoria();
+                    p1.sumaDerrotas();
+                } else {
+                    System.out.println("El código ingresado no corresponde a ningún personaje de este duelo.");
+                }
                 System.out.println(due.toString());
             } else {
                 System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
@@ -182,7 +190,6 @@ public class torneoTest {
     }
 
     // 9. Calcular recursivamente la cantidad de horarios
-
     public void horarios() {
         System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(torneo, 0, 0));
     }
