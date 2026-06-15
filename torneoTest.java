@@ -145,15 +145,6 @@ public class torneoTest {
         }
     }
 
-    // Método auxiliar para imprimir el arreglo
-    public static void imprimirArreglo(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-
-    }
-
     // 7. Mostrar los datos de un personaje dado
     public void mostrarPersonaje(Personaje[] personajes) {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
