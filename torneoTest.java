@@ -25,7 +25,7 @@ public class torneoTest {
     }
 
     // 2. Agregar un nuevo personaje
-    public void agregarPersonaje(Personaje[] personajes) {
+    public void agregarPersonaje() {
         int i = 0;
         boolean cargado = false;
 
@@ -72,7 +72,7 @@ public class torneoTest {
      * • Ninguno de los personajes participe en otro duelo ese mismo día.a
      * • El horario esté entre 08 y 22 inclusive. a
      */
-    public void agregarDuelo(Duelo[][] torneo) {
+    public void agregarDuelo() {
         AgregarDueloLogica adLogica = new AgregarDueloLogica();
 
         String nroDuelo = adLogica.leerCodigoDuelo(torneo);
@@ -100,13 +100,13 @@ public class torneoTest {
     }
 
     // 4. Marcar un duelo como realizado
-    public void marcaDueloRealizado(Duelo[][] matriz) {
+    public void marcaDueloRealizado() {
         System.out.print("Ingrese el codigo del duelo realizado: ");
         String idDuelo = sc.nextLine();
         System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
         String pGanador = sc.nextLine();
         if (uTorneo.verificarCodigoUniversal(idDuelo)) {
-            Duelo due = uTorneo.buscarDuelo(idDuelo, matriz);
+            Duelo due = uTorneo.buscarDuelo(idDuelo, torneo);
             if (due.getEstado().equals("programado")) {
                 due.setEstado("realizado");
                 Personaje perdedor = due.getPrimerPersonaje();
@@ -126,8 +126,8 @@ public class torneoTest {
     }
 
     // 5. Calcular en forma recursiva la cantidad total de duelos realizados
-    public void cantDueloRealizados(Duelo[][] duelo) {
-        System.out.println("La cantidad de duelos REALIZADOS: " + uTorneo.duelosRealizados(duelo, 0, 0));
+    public void cantDueloRealizados() {
+        System.out.println("La cantidad de duelos REALIZADOS: " + uTorneo.duelosRealizados(torneo, 0, 0));
     }
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
@@ -145,7 +145,7 @@ public class torneoTest {
     }
 
     // 7. Mostrar los datos de un personaje dado
-    public void mostrarPersonaje(Personaje[] personajes) {
+    public void mostrarPersonaje() {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
         String idP = sc.nextLine();
 
@@ -183,8 +183,8 @@ public class torneoTest {
 
     // 9. Calcular recursivamente la cantidad de horarios
 
-    public void horarios(Duelo[][] duelo) {
-        System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(duelo, 0, 0));
+    public void horarios() {
+        System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(torneo, 0, 0));
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica
@@ -239,32 +239,27 @@ public class torneoTest {
             if (opcion >= 0 && opcion <= 9) {
                 switch (opcion) {
                     case 1:
-                        agregarPersonaje(personajes);// agregarPersonaje();
+                        agregarPersonaje();
                         break;
 
                     case 2:
-                        agregarDuelo(torneo);
-                        // agregarDuelo();
+                        agregarDuelo();
                         break;
 
                     case 3:
-                        marcaDueloRealizado(torneo);
-                        // marcarDueloRealizado();
+                        marcaDueloRealizado();
                         break;
 
                     case 4:
-                        cantDueloRealizados(torneo);
-                        // duelosRealizados(matrizTorneo, 0, 0);
+                        cantDueloRealizados();
                         break;
 
                     case 5:
                         ordenarDia();
-                        // mostrarDuelosDia();
                         break;
 
                     case 6:
-                        mostrarPersonaje(personajes);
-                        // mostrarEstadisticasPersonaje();
+                        mostrarPersonaje();
                         break;
 
                     case 7:
@@ -273,16 +268,14 @@ public class torneoTest {
                         for (int i = 0; i < arr.length && arr[i] != null; i++) {
                             System.out.println(arr[i]);
                         }
-                        // duelosDentroRango();
                         break;
 
                     case 8:
-                        horarios(torneo);
+                        horarios();
                         break;
 
                     case 9:
                         mostrarDueloMagia();
-                        // mostrarPrimerDiaArmaMagica();
                         break;
 
                     case 0:
