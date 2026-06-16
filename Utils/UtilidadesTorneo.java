@@ -262,7 +262,18 @@ public class UtilidadesTorneo {
         return contador;
     }
 
-    // Metodo recursivo 2
+    /**
+     * Recorre recursivamente la matriz de duelo y cuenta cuantos horarios
+     * libres o "null".
+     * 
+     * El recorrido busca los horarios fila por fila hasta el final de la
+     * de la matriz
+     * 
+     * @param duelo Matriz que contiene los duelos del torneo.
+     * @param fil   Fila actual de recorrido.
+     * @param col   Columna actual del recorrido.
+     * @return Cantidad total de horarios libres o "null".
+     */
     public int horariosLibres(Duelo[][] duelo, int fil, int col) {
         int contador = 0;
         if (fil == duelo.length) {
@@ -279,7 +290,13 @@ public class UtilidadesTorneo {
         return contador;
     }
 
-    // Este modulo suma el nivel de poder De cada duelo
+    /**
+     * Obtiene el nivel de energia de cada personaje y armas que participan en un
+     * duelo.
+     * 
+     * @param duelo
+     * @return La suma de nivel de poder total de los 2 personajes y 2 armas.
+     */
     public int calcularPoderTotal(Duelo duelo) {
         int sumaPoder = 0;
         if (duelo != null) {
@@ -292,6 +309,17 @@ public class UtilidadesTorneo {
         return sumaPoder;
     }
 
+    /**
+     * Buscamos, en un arrelgo de Duelo, el dia elegido. Luego se crea otro arrelgo
+     * Copia para poder ordenar un arreglo sin tener que modificar la matriz
+     * original.
+     * 
+     * Luego ordena con el metodo quickSort.
+     * 
+     * @param torneo
+     * @param diaEleg
+     * @return
+     */
     public Duelo[] obternerFilaOrdenada(Duelo[][] torneo, int diaEleg) {
         // Obtenemos la fila original
         Duelo[] filaOriginal = torneo[diaEleg];
@@ -311,7 +339,14 @@ public class UtilidadesTorneo {
         return filaCopia;
     }
 
-    // Metodo de ordenamiento Quick Sort
+    /**
+     * Ordena un arreglo de objetos Duelo utilizando el algoritmo QuickSort de forma
+     * recursiva.
+     * 
+     * @param fila Arreglo de objetos Duelo que se desea ordenar.
+     * @param ini  Índice inicial del segmento del arreglo a ordenar.
+     * @param fin  Índice final del segmento del arreglo a ordenar.
+     */
     public void quickSort(Duelo[] fila, int ini, int fin) {
         if (ini < fin) {
             int indice = particion(fila, ini, fin);
@@ -321,7 +356,18 @@ public class UtilidadesTorneo {
         }
     }
 
-    // Metodo de particion que usa QuickSort
+    /**
+     * Selecciona un pivote y reorganiza el arreglo de modo que los elementos
+     * menores
+     * queden a la izquierda y los mayores a la derecha. Método de "divide y
+     * vencerás".
+     * 
+     * @param fila Arreglo de objetos Duelo que se está particionando.
+     * @param ini  Índice inicial del segmento a evaluar.
+     * @param fin  Índice final del segmento a evaluar.
+     * @return El índice de la posición final del pivote después de la
+     *         reorganización.
+     */
     private int particion(Duelo[] fila, int ini, int fin) {
         int medio = (ini + fin) / 2;
 
@@ -349,7 +395,13 @@ public class UtilidadesTorneo {
         return i + 1;
     }
 
-    // Este modulo escribe en un archivo .txt
+    /**
+     * Guarda la fila ya ordenada en un archivo de texto con un formato específico.
+     * 
+     * @param arr      Arreglo de objetos Duelo que contiene los datos a persistir.
+     * @param ordenado Nombre o ruta del archivo .txt donde se escribirá la
+     *                 información.
+     */
     public void guardarEnArchivo(Duelo[] arr, String ordenado) {
         // Usamos try-with-resources para asegurar que el archivo se cierre
         // correctamente solo
