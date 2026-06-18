@@ -453,7 +453,6 @@ public class UtilidadesTorneo {
 
             }
 
-            System.out.println("¡Datos guardados con éxito en " + ordenado + "!");
             System.out.println();
             System.out.println("========================================================");
             System.out.println();
