@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class torneoTest {
     static Scanner sc = new Scanner(System.in);
     Duelo[][] torneo = new Duelo[7][15];
-    Personaje[] personajes = new Personaje[100];
-    Arma[] armas = new Arma[100];
-    Arena[] arenas = new Arena[100];
+    Personaje[] personajes = new Personaje[1000];
+    Arma[] armas = new Arma[1000];
+    Arena[] arenas = new Arena[1000];
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
 
