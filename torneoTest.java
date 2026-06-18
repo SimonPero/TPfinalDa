@@ -16,7 +16,7 @@ public class torneoTest {
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
 
-    // 1. Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
+    // 1. Este modulo se encarga de Carcar los archivos de .txt
     public void cargarTxt() {
         cDatos.cargarArenas("./Textos/arenas.txt", arenas);
         cDatos.cargarArmas("./Textos/armas.txt", armas);
@@ -141,12 +141,33 @@ public class torneoTest {
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
     public void ordenarDia() {
+        System.out.println();
         // Pedimos al usuario que ingrese el dia a ordenar
-        System.out.print("Ingrese el dia a ordenar: ");
+        System.out.println("Ingrese el dia a ordenar (lunes a domingo): ");
         String dia = sc.nextLine();
         int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
+
         if (filTorneo != -1) {
             Duelo[] arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
+            for (int i = 0; i < arrayCopia.length; i++) {
+                if (arrayCopia[i] != null) {
+                    System.out.println(arrayCopia[i] + " ");
+                }
+            }
+            int opcion = -1;
+
+            while (opcion != 0 && opcion != 1) {
+                System.out.println("¿Quieres que el ordenamiento se vea reflejado en la tabla del torneo?");
+                System.out.println("[1] Sí");
+                System.out.println("[0] No");
+                System.out.print("Opción: ");
+
+                opcion = Integer.parseInt(sc.nextLine());
+
+                if (opcion != 0 && opcion != 1) {
+                    System.out.println("Opción inválida. Debe ingresar 1 o 0.");
+                }
+            }
             uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
 
         }
@@ -241,7 +262,9 @@ public class torneoTest {
         }
         do {// Repetir la cantidad de veces que el usuario desee
             System.out.print("Ingrese un opcion: ");
-            opcion = sc.nextInt();
+            opcion = Integer.parseInt(sc.nextLine());
+            // Evitar todos los problemas de mezcla entre nextInt(), nextDouble() y
+            // nextLine().
             System.out.println();
             if (opcion >= 0 && opcion <= 9) {
                 switch (opcion) {
