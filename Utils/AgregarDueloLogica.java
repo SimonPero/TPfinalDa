@@ -40,7 +40,7 @@ public class AgregarDueloLogica {
             System.out.print("Ingrese el numero de duelo: ");
             nroDuelo = sc.nextLine();
 
-            if (!uTorneo.verificarCodigoUniversal(nroDuelo)) {
+            if (!uTorneo.verificarCodigoUniversal(nroDuelo, 'D')) {
                 System.out.println("Codigo invalido");
 
             } else if (uTorneo.buscarDuelo(nroDuelo, torneo) != null) {
