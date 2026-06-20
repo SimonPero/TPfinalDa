@@ -10,13 +10,13 @@ import java.util.Scanner;
 public class torneoTest {
     static Scanner sc = new Scanner(System.in);
     Duelo[][] torneo = new Duelo[7][15];
-    Personaje[] personajes = new Personaje[100];
-    Arma[] armas = new Arma[100];
-    Arena[] arenas = new Arena[100];
+    Personaje[] personajes = new Personaje[1000];
+    Arma[] armas = new Arma[1000];
+    Arena[] arenas = new Arena[1000];
     UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
 
-    // 1. Este modulo se encarga de Carcar los archivos de .txt(REVISAR)
+    // 1. Este modulo se encarga de Carcar los archivos de .txt
     public void cargarTxt() {
         cDatos.cargarArenas("./Textos/arenas.txt", arenas);
         cDatos.cargarArmas("./Textos/armas.txt", armas);
@@ -141,12 +141,33 @@ public class torneoTest {
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
     public void ordenarDia() {
+        System.out.println();
         // Pedimos al usuario que ingrese el dia a ordenar
-        System.out.print("Ingrese el dia a ordenar: ");
+        System.out.println("Ingrese el dia a ordenar (lunes a domingo): ");
         String dia = sc.nextLine();
         int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
+
         if (filTorneo != -1) {
             Duelo[] arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
+            for (int i = 0; i < arrayCopia.length; i++) {
+                if (arrayCopia[i] != null) {
+                    System.out.println(arrayCopia[i] + " ");
+                }
+            }
+            int opcion = -1;
+
+            while (opcion != 0 && opcion != 1) {
+                System.out.println("¿Quieres que el ordenamiento se vea reflejado en la tabla del torneo?");
+                System.out.println("[1] Sí");
+                System.out.println("[0] No");
+                System.out.print("Opción: ");
+
+                opcion = Integer.parseInt(sc.nextLine());
+
+                if (opcion != 0 && opcion != 1) {
+                    System.out.println("Opción inválida. Debe ingresar 1 o 0.");
+                }
+            }
             uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
 
         }
@@ -242,7 +263,9 @@ public class torneoTest {
                 System.out.println("========================================================");
             }
             System.out.print("Ingrese un opcion: ");
-            opcion = sc.nextInt();
+            opcion = Integer.parseInt(sc.nextLine());
+            // Evitar todos los problemas de mezcla entre nextInt(), nextDouble() y
+            // nextLine().
             System.out.println();
             sc.nextLine();
             if (opcion >= 0 && opcion <= 9) {
