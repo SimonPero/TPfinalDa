@@ -173,7 +173,7 @@ public class UtilidadesTorneo {
      * @param codigo Código a validar.
      * @return true si el formato es válido, false en caso contrario.
      */
-    public boolean verificarCodigoUniversal(String codigo) {
+    public boolean verificarCodigoUniversal(String codigo, char letraValida) {
         boolean flag = true;
         int i = 1;
 
@@ -183,7 +183,7 @@ public class UtilidadesTorneo {
             codigo = codigo.trim();
             char c = Character.toUpperCase(codigo.charAt(0));
 
-            if (("ADRP").indexOf(c) != -1) {
+            if (c == letraValida) {
                 while (i < codigo.length() && flag) {
                     char num = codigo.charAt(i);
 

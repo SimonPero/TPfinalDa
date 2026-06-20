@@ -26,52 +26,52 @@ public class torneoTest {
 
     // 2. Agregar un nuevo personaje
     public void agregarPersonaje() {
+        String codigoP;
+        boolean codigoValido = false;
+
+        do {
+            System.out.print("Ingrese el codigo del personaje: ");
+            codigoP = sc.nextLine();
+
+            if (uTorneo.verificarCodigoUniversal(codigoP, 'P')
+                    && uTorneo.buscarPersonaje(codigoP, personajes) != null) {
+                codigoValido = true;
+                System.out.println("Codigo valido!");
+            } else {
+                System.out.println("Codigo invalido o ya existente! Intente nuevamente.\n");
+            }
+        } while (!codigoValido);
+
+        System.out.print("Ingrese el nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Ingrese el tipo de personaje: ");
+        String tipo = sc.nextLine();
+
+        System.out.print("Ingrese su nivel de energia: ");
+        int nivelEnergia = sc.nextInt();
+
+        System.out.print("Ingrese la cantidad de duelos ganados: ");
+        int cantDG = sc.nextInt();
+
+        System.out.print("Ingrese la cantidad de duelos perdidos: ");
+        int cantDP = sc.nextInt();
+        sc.nextLine();
         int i = 0;
         boolean cargado = false;
 
-        System.out.print("Ingrese el codigo del personaje: ");
-        String codigoP = sc.nextLine();
-        if (uTorneo.verificarCodigoUniversal(codigoP) && uTorneo.buscarPersonaje(codigoP, personajes) == null) {
-            System.out.println("Codigo valido y cargado con exito!");
-            System.out.print("Ingrese el nombre: ");
-            String nombre = sc.nextLine();
-            System.out.print("Ingrese el tipo de personaje: ");
-            String tipo = sc.nextLine();
-            System.out.print("Ingrese su nivel de energia: ");
-            int nivelEnergia = sc.nextInt();
-            System.out.print("Ingrese la cantidad de duelos ganados: ");
-            int cantDG = sc.nextInt();
-            System.out.print("Ingrese la cantidad de duelos perdidos: ");
-            int cantDP = sc.nextInt();
-            // Busca el espacio null para cargar a un personaje nuevo
-            while (i < personajes.length && !cargado) {
-                if (personajes[i] == null) {
-                    personajes[i] = new Personaje(codigoP, nombre, tipo, nivelEnergia, cantDG, cantDP);
-                    System.out.println(personajes[i]);
-                    System.out.println("Personaje cargado con exito!");
-                    cargado = true;
-                }
-                i++;
+        while (i < personajes.length && !cargado) {
+            if (personajes[i] == null) {
+                personajes[i] = new Personaje(codigoP, nombre, tipo, nivelEnergia, cantDG, cantDP);
+                System.out.println(personajes[i]);
+                System.out.println("Personaje cargado con exito!");
+                cargado = true;
             }
-
-        } else {
-            System.out.println("Codigo invalido!");
-
+            i++;
         }
-
     }
 
     // 3. Agregar un nuevo duelo al cronograma semanal
-    /*
-     * • El número de duelo no esté repetido. a
-     * • Los personajes existan. a
-     * • Los personajes sean diferentes. a
-     * • Las armas existan.
-     * • La arena exista.
-     * • El día y horario estén disponibles.a
-     * • Ninguno de los personajes participe en otro duelo ese mismo día.a
-     * • El horario esté entre 08 y 22 inclusive. a
-     */
     public void agregarDuelo() {
         AgregarDueloLogica adLogica = new AgregarDueloLogica();
 
@@ -103,7 +103,7 @@ public class torneoTest {
     public void marcaDueloRealizado() {
         System.out.print("Ingrese el codigo del duelo realizado: ");
         String idDuelo = sc.nextLine();
-        if (uTorneo.verificarCodigoUniversal(idDuelo)) {
+        if (uTorneo.verificarCodigoUniversal(idDuelo, 'D')) {
             Duelo due = uTorneo.buscarDuelo(idDuelo, torneo);
             if (due.getEstado().equals("programado")) {
                 due.setEstado("realizado");
@@ -157,7 +157,7 @@ public class torneoTest {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
         String idP = sc.nextLine();
 
-        if (uTorneo.verificarCodigoUniversal(idP)) {
+        if (uTorneo.verificarCodigoUniversal(idP, 'P')) {
             Personaje pj = uTorneo.buscarPersonaje(idP, personajes);
             if (pj != null) {
                 System.out.println(pj);
@@ -222,27 +222,29 @@ public class torneoTest {
     // el usuario quiera.
     public void menu() {
         int opcion;
-        {// Opciones de menu
-            System.out.println("========================================================");
-            System.out.println("                SISTEMA DE TORNEOS RPG                  ");
-            System.out.println("========================================================");
-            System.out.println(" 1. Agregar Personaje");
-            System.out.println(" 2. Agregar Duelo");
-            System.out.println(" 3. Marcar Duelo Realizado");
-            System.out.println(" 4. Cantidad de Duelos Realizados (Recursivo)");
-            System.out.println(" 5. Mostrar Duelos del Día (Ordenados por Poder)");
-            System.out.println(" 6. Mostrar Estadísticas de Personaje");
-            System.out.println(" 7. Duelos Dentro de Rango de Poder");
-            System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
-            System.out.println(" 9. Mostrar Primer Día con Arma Mágica");
-            System.out.println("--------------------------------------------------------");
-            System.out.println(" 0. Salir del Programa");
-            System.out.println("========================================================");
-        }
+
         do {// Repetir la cantidad de veces que el usuario desee
+            {// Opciones de menu
+                System.out.println("========================================================");
+                System.out.println("                SISTEMA DE TORNEOS RPG                  ");
+                System.out.println("========================================================");
+                System.out.println(" 1. Agregar Personaje");
+                System.out.println(" 2. Agregar Duelo");
+                System.out.println(" 3. Marcar Duelo Realizado");
+                System.out.println(" 4. Cantidad de Duelos Realizados (Recursivo)");
+                System.out.println(" 5. Mostrar Duelos del Día (Ordenados por Poder)");
+                System.out.println(" 6. Mostrar Estadísticas de Personaje");
+                System.out.println(" 7. Duelos Dentro de Rango de Poder");
+                System.out.println(" 8. Cantidad de Horarios Libres (Recursivo)");
+                System.out.println(" 9. Mostrar Primer Día con Arma Mágica");
+                System.out.println("--------------------------------------------------------");
+                System.out.println(" 0. Salir del Programa");
+                System.out.println("========================================================");
+            }
             System.out.print("Ingrese un opcion: ");
             opcion = sc.nextInt();
             System.out.println();
+            sc.nextLine();
             if (opcion >= 0 && opcion <= 9) {
                 switch (opcion) {
                     case 1:
