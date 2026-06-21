@@ -202,18 +202,15 @@ public class torneoTest {
         //Se piden los límites del rango
         for (int i = 0; i < torneo.length; i++) {
             for (int j = 0; j < torneo[0].length; j++) {
-                //Se recurren los duelos
                 int poderT = uTorneo.calcularPoderTotal(torneo[i][j]);
                 if (poderT >= rangoMin && poderT <= rangoMax) {
                     dueloRango[ac] = torneo[i][j];
                     //Si el poder total del duelo entra en el rango se agrega al arreglo
                     ac++;
-                    //Avanza a la próxima posición
                 }
             }
         }
         return dueloRango;
-        //Retorna el arreglo
     }
 
     // 9. Calcular recursivamente la cantidad de horarios
@@ -236,13 +233,13 @@ public class torneoTest {
                     flag = false;
                     System.out.println("El primer duelo con un arma mágica del día " + uTorneo.filaADia(i)
                             + " es a las " + (j + 8));
-                    //Si se detecta por lo menos un arma mágica en ese duelo, se le muestra al usuario y se pasa al siguiente día
+                    //Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
                 }
                 j++;
             }
             if (flag) {
                 System.out.println("En el día " + uTorneo.filaADia(i) + " no hay ningún duelo con alguna arma mágica");
-                //Si se termina de recorrer la fila y no hay ninguna arma mágica, se le muestra al usuario y se pasa al siguiente día
+                //Solo llega si en el día no se usa ninguna arma mágica
             }
             i++;
         }
