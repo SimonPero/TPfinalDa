@@ -184,10 +184,12 @@ public class UtilidadesTorneo {
             char c = Character.toUpperCase(codigo.charAt(0));
 
             if (c == letraValida) {
+
                 while (i < codigo.length() && flag) {
                     char num = codigo.charAt(i);
 
                     if (!Character.isDigit(num)) {
+                        System.out.println("asdas");
                         flag = false;
                     }
                     i++;
