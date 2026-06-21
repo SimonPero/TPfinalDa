@@ -276,7 +276,6 @@ public class torneoTest {
             // Evitar todos los problemas de mezcla entre nextInt(), nextDouble() y
             // nextLine().
             System.out.println();
-            sc.nextLine();
             if (opcion >= 0 && opcion <= 9) {
                 switch (opcion) {
                     case 1:
