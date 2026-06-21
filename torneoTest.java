@@ -26,10 +26,11 @@ public class torneoTest {
 
     // 2. Agregar un nuevo personaje
     public void agregarPersonaje() {
-        String codigoP;
+        String codigoP = "P000";
         boolean codigoValido = false;
 
-        do {
+
+        while (!codigoValido) {
             System.out.print("Ingrese el codigo del personaje: ");
             codigoP = sc.nextLine();
 
@@ -40,7 +41,7 @@ public class torneoTest {
             } else {
                 System.out.println("Codigo invalido o ya existente! Intente nuevamente.\n");
             }
-        } while (!codigoValido);
+        }
 
         System.out.print("Ingrese el nombre: ");
         String nombre = sc.nextLine();
@@ -239,13 +240,13 @@ public class torneoTest {
                     flag = false;
                     System.out.println("El primer duelo con un arma mágica del día " + uTorneo.filaADia(i)
                             + " es a las " + (j + 8));
-                    //Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
+                    // Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
                 }
                 j++;
             }
             if (flag) {
                 System.out.println("En el día " + uTorneo.filaADia(i) + " no hay ningún duelo con alguna arma mágica");
-                //Solo llega si en el día no se usa ninguna arma mágica
+                // Solo llega si en el día no se usa ninguna arma mágica
             }
             i++;
         }
