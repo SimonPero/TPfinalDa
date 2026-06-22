@@ -41,7 +41,7 @@ public class torneoTest {
                 System.out.println("Codigo invalido o ya existente! Intente nuevamente.\n");
             }
         }
-
+        //Se asigna un código
         System.out.print("Ingrese el nombre: ");
         String nombre = sc.nextLine();
 
@@ -56,6 +56,7 @@ public class torneoTest {
 
         System.out.print("Ingrese la cantidad de duelos perdidos: ");
         int cantDP = sc.nextInt();
+        //Se asignan datos para cargarlos en el personaje
         sc.nextLine();
         int i = 0;
         boolean cargado = false;
@@ -128,7 +129,7 @@ public class torneoTest {
                     p2.sumaVictoria();
                     p1.sumaDerrotas();
                 }
-
+                //Se modifican las victorias del ganador y las derrotas del perdedor
                 System.out.println(due);
             } else {
                 System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
@@ -161,23 +162,9 @@ public class torneoTest {
                     System.out.println(arrayCopia[i] + " ");
                 }
             }
-            int opcion = -1;
-
-            while (opcion != 0 && opcion != 1) {
-                System.out.println("¿Quieres que el ordenamiento se vea reflejado en la tabla del torneo?");
-                System.out.println("[1] Sí");
-                System.out.println("[0] No");
-                System.out.print("Opción: ");
-
-                opcion = Integer.parseInt(sc.nextLine());
-
-                if (opcion != 0 && opcion != 1) {
-                    System.out.println("Opción inválida. Debe ingresar 1 o 0.");
-                }
-            }
             uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
-
         }
+        //Se ordena el día y se muestra
     }
 
     // 7. Mostrar los datos de un personaje dado
