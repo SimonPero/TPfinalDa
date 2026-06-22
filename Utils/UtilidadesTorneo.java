@@ -68,19 +68,24 @@ public class UtilidadesTorneo {
      * @return El duelo encontrado o null si no existe.
      */
     public Duelo buscarDuelo(String id, Duelo[][] duelo) {
-        int i = 0, j = 0;
+        int i = 0;
+        Duelo encontrado = null;
         id = id.toUpperCase();
 
-        while (i < duelo.length && duelo[i][j] != null && !duelo[i][j].getNroDuelo().equals(id)) {
-            while (j < duelo[i].length && duelo[i][j] != null && !duelo[i][j].getNroDuelo().equals(id)) {
+        while (i < duelo.length && encontrado == null) {
+            int j = 0;
+
+            while (j < duelo[i].length && duelo[i][j] != null && encontrado == null) {
+                if (duelo[i][j].getNroDuelo().equals(id)) {
+                    encontrado = duelo[i][j];
+                }
                 j++;
             }
+
             i++;
         }
 
-        return (i < duelo.length && j < duelo[0].length && duelo[i][j] != null)
-                ? duelo[i][j]
-                : null;
+        return encontrado;
     }
 
     /**

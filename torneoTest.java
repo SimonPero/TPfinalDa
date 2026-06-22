@@ -29,7 +29,6 @@ public class torneoTest {
         String codigoP = "P000";
         boolean codigoValido = false;
 
-
         while (!codigoValido) {
             System.out.print("Ingrese el codigo del personaje: ");
             codigoP = sc.nextLine();
@@ -78,10 +77,9 @@ public class torneoTest {
 
         String nroDuelo = adLogica.leerCodigoDuelo(torneo);
 
-        String dia = adLogica.leerDia();
-        String hora = adLogica.leerHora();
+        int filDia = adLogica.leerDia(torneo);
+        String hora = adLogica.leerHora(torneo, filDia);
 
-        int filDia = uTorneo.diaAfila(dia);
         int colHora = Integer.parseInt(hora) - 8;
 
         Personaje[] pjs = adLogica.leerPersonajes(torneo, personajes, filDia);
@@ -95,9 +93,11 @@ public class torneoTest {
                 armasDuelo[0],
                 armasDuelo[1],
                 arena.getNombreArena(),
-                dia,
+                uTorneo.filaADia(filDia),
                 hora,
                 "programado");
+
+        System.out.println(torneo[filDia][colHora]);
     }
 
     // 4. Marcar un duelo como realizado

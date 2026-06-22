@@ -10,6 +10,10 @@ import java.util.Scanner;
  * Contiene la lógica auxiliar utilizada por la función agregarDuelo.
  * Su objetivo es centralizar las validaciones y la lectura de datos
  * necesarios para crear un nuevo duelo dentro del torneo.
+ *
+ * Las columnas de la matriz "torneo" representan las horas del día,
+ * de 8 a 22 hs: la columna 0 corresponde a las 8hs, la columna 1 a
+ * las 9hs, y así sucesivamente (columna = hora - 8).
  */
 public class AgregarDueloLogica {
     /**
@@ -33,17 +37,17 @@ public class AgregarDueloLogica {
      */
     public String leerCodigoDuelo(Duelo[][] torneo) {
 
-        String nroDuelo = null;
+        String codDuelo = null;
         boolean valido = false;
 
         while (!valido) {
-            System.out.print("Ingrese el numero de duelo: ");
-            nroDuelo = sc.nextLine();
+            System.out.print("Ingrese el codigo de duelo: ");
+            codDuelo = sc.nextLine();
 
-            if (!uTorneo.verificarCodigoUniversal(nroDuelo, 'D')) {
+            if (!uTorneo.verificarCodigoUniversal(codDuelo, 'D')) {
                 System.out.println("Codigo invalido");
 
-            } else if (uTorneo.buscarDuelo(nroDuelo, torneo) != null) {
+            } else if (uTorneo.buscarDuelo(codDuelo, torneo) != null) {
                 System.out.println("Ya existe un duelo con ese codigo");
 
             } else {
@@ -51,65 +55,89 @@ public class AgregarDueloLogica {
             }
         }
 
-        return nroDuelo;
+        return codDuelo;
     }
 
     /**
      * Solicita el día en que se realizará el duelo y verifica que
-     * corresponda a uno de los días válidos de la semana.
+     * corresponda a uno de los días válidos de la semana, y que
+     * tenga al menos un horario libre.
      *
-     * El valor ingresado se convierte a minúsculas para reducir
-     * errores de ingreso por parte del usuario.
-     *
-     * @return Día validado en minúsculas.
+     * @param torneo Matriz de duelos del torneo.
+     * @return Fila (día) validada.
      */
-    public String leerDia() {
-
-        String dia = null;
+    public int leerDia(Duelo[][] torneo) {
+        int filDia = -1;
         boolean valido = false;
 
         while (!valido) {
             System.out.print("Ingrese el dia del duelo: ");
-            System.out.print("opciones: lunes, martes, miercoles, jueves, viernes, sabado, domingo ");
+            System.out.print("Opciones: lunes, martes, miercoles, jueves, viernes, sabado, domingo: ");
 
-            dia = sc.nextLine().toLowerCase();
+            String dia = sc.nextLine().toLowerCase();
+            filDia = uTorneo.diaAfila(dia);
 
-            if (uTorneo.diaAfila(dia) != -1) {
-                valido = true;
+            if (filDia == -1) {
+                System.out.println("Dia invalido.");
+
+            } else if (diaCompleto(torneo, filDia)) {
+                System.out.println("Ese dia ya esta completo.");
+                filDia = -1;
+
             } else {
-                System.out.println("Dia invalido");
+                valido = true;
             }
         }
 
-        return dia;
+        return filDia;
     }
 
     /**
-     * Solicita la hora del duelo y verifica que se encuentre
-     * dentro del rango permitido (08 a 22 horas inclusive).
+     * Verifica si todas las horas de un día ya tienen un duelo asignado.
+     *
+     * @param torneo Matriz de duelos del torneo.
+     * @param filDia Fila correspondiente al día a verificar.
+     * @return true si no queda ningún horario libre, false en caso contrario.
+     */
+    private boolean diaCompleto(Duelo[][] torneo, int filDia) {
+        for (int j = 0; j < torneo[filDia].length; j++) {
+            if (torneo[filDia][j] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Solicita la hora del duelo y verifica que:
+     * - Se encuentre dentro del rango permitido (08 a 22 horas inclusive).
+     * - Esa hora se encuentre libre dentro del día ya seleccionado.
      *
      * La hora se devuelve con dos dígitos para mantener el formato
      * utilizado por los objetos Duelo.
      *
+     * @param torneo Matriz de duelos del torneo.
+     * @param filDia Fila correspondiente al día ya seleccionado.
      * @return Hora validada en formato "HH".
      */
-    public String leerHora() {
+    public String leerHora(Duelo[][] torneo, int filDia) {
 
         String horaReal = null;
         boolean valido = false;
 
         while (!valido) {
             System.out.print("Ingrese la hora (8-22): ");
-            int hora = sc.nextInt();
-            sc.nextLine();
+            int hora = Integer.parseInt(sc.nextLine());
 
-            if (hora >= 8 && hora <= 22) {
-                horaReal = String.format("%02d", hora);
-                valido = true;
+            if (hora < 8 || hora > 22) {
+                System.out.println("Hora invalida");
+
+            } else if (torneo[filDia][hora - 8] != null) {
+                System.out.println("Esa hora ya esta ocupada ese dia.");
 
             } else {
-
-                System.out.println("Hora invalida");
+                horaReal = String.format("%02d", hora);
+                valido = true;
             }
         }
 
