@@ -13,14 +13,13 @@ public class torneoTest {
     static Personaje[] personajes = new Personaje[1000];
     static Arma[] armas = new Arma[1000];
     static Arena[] arenas = new Arena[1000];
-    CargarDatos cDatos = new CargarDatos();
 
     // 1. Este modulo se encarga de Carcar los archivos de .txt
-    public void cargarTxt() {
-        cDatos.cargarArenas("./Textos/arenas.txt", arenas);
-        cDatos.cargarArmas("./Textos/armas.txt", armas);
-        cDatos.cargarPersonajes("./Textos/personajes.txt", personajes);
-        cDatos.cargarDuelos("./Textos/duelos.txt", torneo, personajes, armas);
+    public static void cargarTxt() {
+        CargarDatos.cargarArenas("./Textos/arenas.txt", arenas);
+        CargarDatos.cargarArmas("./Textos/armas.txt", armas);
+        CargarDatos.cargarPersonajes("./Textos/personajes.txt", personajes);
+        CargarDatos.cargarDuelos("./Textos/duelos.txt", torneo, personajes, armas);
     }
 
     // 2. Agregar un nuevo personaje
@@ -73,18 +72,18 @@ public class torneoTest {
 
     // 3. Agregar un nuevo duelo al cronograma semanal
     public static void agregarDuelo() {
-        AgregarDueloLogica adLogica = new AgregarDueloLogica();
+        AgregarDueloLogica AgregarDueloLogica = new AgregarDueloLogica();
 
-        String nroDuelo = adLogica.leerCodigoDuelo(torneo);
+        String nroDuelo = AgregarDueloLogica.leerCodigoDuelo(torneo);
 
-        int filDia = adLogica.leerDia(torneo);
-        String hora = adLogica.leerHora(torneo, filDia);
+        int filDia = AgregarDueloLogica.leerDia(torneo);
+        String hora = AgregarDueloLogica.leerHora(torneo, filDia);
 
         int colHora = Integer.parseInt(hora) - 8;
 
-        Personaje[] pjs = adLogica.leerPersonajes(torneo, personajes, filDia);
-        Arma[] armasDuelo = adLogica.leerArmas(armas);
-        Arena arena = adLogica.leerArena(arenas);
+        Personaje[] pjs = AgregarDueloLogica.leerPersonajes(torneo, personajes, filDia);
+        Arma[] armasDuelo = AgregarDueloLogica.leerArmas(armas);
+        Arena arena = AgregarDueloLogica.leerArena(arenas);
 
         torneo[filDia][colHora] = new Duelo(
                 nroDuelo,
