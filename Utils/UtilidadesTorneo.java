@@ -21,7 +21,7 @@ public class UtilidadesTorneo {
      * @param dia Día de la semana.
      * @return Índice de fila asociado al día o -1 si el día es inválido.
      */
-    public int diaAfila(String dia) {
+    public static int diaAfila(String dia) {
         int res = -1;
         switch (dia.toLowerCase()) {
             case "lunes" -> res = 0;
@@ -43,7 +43,7 @@ public class UtilidadesTorneo {
      * @return string asociado a la fila correspondiente o el resultado inválido
      *         "error"
      */
-    public String filaADia(int dia) {
+    public static String filaADia(int dia) {
         String res = "error";
         switch (dia) {
             case 0 -> res = "Lunes";
@@ -67,7 +67,7 @@ public class UtilidadesTorneo {
      * @param duelo Matriz de duelos.
      * @return El duelo encontrado o null si no existe.
      */
-    public Duelo buscarDuelo(String id, Duelo[][] duelo) {
+    public static Duelo buscarDuelo(String id, Duelo[][] duelo) {
         int i = 0;
         Duelo encontrado = null;
         id = id.toUpperCase();
@@ -98,7 +98,7 @@ public class UtilidadesTorneo {
      * @param personajes Arreglo de personajes.
      * @return El personaje encontrado o null si no existe.
      */
-    public Personaje buscarPersonaje(String id, Personaje[] personajes) {
+    public static Personaje buscarPersonaje(String id, Personaje[] personajes) {
         int i = 0;
         id = id.toUpperCase();
 
@@ -123,7 +123,7 @@ public class UtilidadesTorneo {
      * @param arenas Arreglo de arenas.
      * @return La arena encontrada o null si no existe.
      */
-    public Arena buscarArena(String id, Arena[] arenas) {
+    public static Arena buscarArena(String id, Arena[] arenas) {
         int i = 0;
         id = id.toUpperCase();
 
@@ -148,7 +148,7 @@ public class UtilidadesTorneo {
      * @param armas Arreglo de armas.
      * @return El arma encontrada o null si no existe.
      */
-    public Arma buscarArma(String id, Arma[] armas) {
+    public static Arma buscarArma(String id, Arma[] armas) {
         int i = 0;
         id = id.toUpperCase();
 
@@ -178,7 +178,7 @@ public class UtilidadesTorneo {
      * @param codigo Código a validar.
      * @return true si el formato es válido, false en caso contrario.
      */
-    public boolean verificarCodigoUniversal(String codigo, char letraValida) {
+    public static boolean verificarCodigoUniversal(String codigo, char letraValida) {
         boolean flag = true;
         int i = 1;
 
@@ -216,7 +216,7 @@ public class UtilidadesTorneo {
      * @return true si el personaje participa ese día,
      *         false en caso contrario.
      */
-    public boolean pjParticipaDia(Personaje pj, int filDia, Duelo[][] torneo) {
+    public static boolean pjParticipaDia(Personaje pj, int filDia, Duelo[][] torneo) {
         boolean res = false;
         int i = 0;
 
@@ -245,7 +245,7 @@ public class UtilidadesTorneo {
      * @param col   Columna actual del recorrido.
      * @return Cantidad total de duelos realizados.
      */
-    public int duelosRealizados(Duelo[][] duelo, int fil, int col) {
+    public static int duelosRealizados(Duelo[][] duelo, int fil, int col) {
         int contador = 0;
 
         if (fil == duelo.length) {
@@ -281,7 +281,7 @@ public class UtilidadesTorneo {
      * @param col   Columna actual del recorrido.
      * @return Cantidad total de horarios libres o "null".
      */
-    public int horariosLibres(Duelo[][] duelo, int fil, int col) {
+    public static int horariosLibres(Duelo[][] duelo, int fil, int col) {
         int contador = 0;
         if (fil == duelo.length) {
             contador = 0;
@@ -304,7 +304,7 @@ public class UtilidadesTorneo {
      * @param duelo
      * @return La suma de nivel de poder total de los 2 personajes y 2 armas.
      */
-    public int calcularPoderTotal(Duelo duelo) {
+    public static int calcularPoderTotal(Duelo duelo) {
         int sumaPoder = 0;
         if (duelo != null) {
             int Ep1 = duelo.getPrimerPersonaje().getNivelEnergiaP();
@@ -327,7 +327,7 @@ public class UtilidadesTorneo {
      * @param diaEleg
      * @return
      */
-    public Duelo[] obternerFilaOrdenada(Duelo[][] torneo, int diaEleg) {
+    public static Duelo[] obternerFilaOrdenada(Duelo[][] torneo, int diaEleg) {
         // Obtenemos la fila original
         Duelo[] filaOriginal = torneo[diaEleg];
 
@@ -354,7 +354,7 @@ public class UtilidadesTorneo {
      * @param ini  Índice inicial del segmento del arreglo a ordenar.
      * @param fin  Índice final del segmento del arreglo a ordenar.
      */
-    public void quickSort(Duelo[] fila, int ini, int fin) {
+    public static void quickSort(Duelo[] fila, int ini, int fin) {
         if (ini < fin) {
             int indice = particion(fila, ini, fin);
             // Llamada recursiva
@@ -375,7 +375,7 @@ public class UtilidadesTorneo {
      * @return El índice de la posición final del pivote después de la
      *         reorganización.
      */
-    private int particion(Duelo[] fila, int ini, int fin) {
+    private static int particion(Duelo[] fila, int ini, int fin) {
         int medio = (ini + fin) / 2;
 
         // Llevar el pivote al final
@@ -409,7 +409,7 @@ public class UtilidadesTorneo {
      * @param ordenado Nombre o ruta del archivo .txt donde se escribirá la
      *                 información.
      */
-    public void guardarEnArchivo(Duelo[] arr, String ordenado) {
+    public static void guardarEnArchivo(Duelo[] arr, String ordenado) {
         // Usamos try-with-resources para asegurar que el archivo se cierre
         // correctamente solo
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ordenado))) {
