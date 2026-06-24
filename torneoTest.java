@@ -72,8 +72,6 @@ public class torneoTest {
 
     // 3. Agregar un nuevo duelo al cronograma semanal
     public static void agregarDuelo() {
-        AgregarDueloLogica AgregarDueloLogica = new AgregarDueloLogica();
-
         String nroDuelo = AgregarDueloLogica.leerCodigoDuelo(torneo);
 
         int filDia = AgregarDueloLogica.leerDia(torneo);
