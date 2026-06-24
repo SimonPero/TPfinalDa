@@ -44,10 +44,10 @@ public class AgregarDueloLogica {
             System.out.print("Ingrese el codigo de duelo: ");
             codDuelo = sc.nextLine();
 
-            if (!uTorneo.verificarCodigoUniversal(codDuelo, 'D')) {
+            if (!UtilidadesTorneo.verificarCodigoUniversal(codDuelo, 'D')) {
                 System.out.println("Codigo invalido");
 
-            } else if (uTorneo.buscarDuelo(codDuelo, torneo) != null) {
+            } else if (UtilidadesTorneo.buscarDuelo(codDuelo, torneo) != null) {
                 System.out.println("Ya existe un duelo con ese codigo");
 
             } else {
@@ -75,7 +75,7 @@ public class AgregarDueloLogica {
             System.out.print("Opciones: lunes, martes, miercoles, jueves, viernes, sabado, domingo: ");
 
             String dia = sc.nextLine().toLowerCase();
-            filDia = uTorneo.diaAfila(dia);
+            filDia = UtilidadesTorneo.diaAfila(dia);
 
             if (filDia == -1) {
                 System.out.println("Dia invalido.");
@@ -172,12 +172,12 @@ public class AgregarDueloLogica {
             System.out.print("Ingrese codigo primer personaje: ");
             String codP1 = sc.nextLine();
 
-            Personaje p1 = uTorneo.buscarPersonaje(codP1, personajes);
+            Personaje p1 = UtilidadesTorneo.buscarPersonaje(codP1, personajes);
 
             System.out.print("Ingrese codigo segundo personaje: ");
             String codP2 = sc.nextLine();
 
-            Personaje p2 = uTorneo.buscarPersonaje(codP2, personajes);
+            Personaje p2 = UtilidadesTorneo.buscarPersonaje(codP2, personajes);
 
             if (p1 == null) {
                 System.out.println("El personaje 1 no existe");
@@ -188,10 +188,10 @@ public class AgregarDueloLogica {
             } else if (p1.equals(p2)) {
                 System.out.println("No pueden ser iguales");
 
-            } else if (uTorneo.pjParticipaDia(p1, filDia, torneo)) {
+            } else if (UtilidadesTorneo.pjParticipaDia(p1, filDia, torneo)) {
                 System.out.println("El personaje 1 ya participa ese dia");
 
-            } else if (uTorneo.pjParticipaDia(p2, filDia, torneo)) {
+            } else if (UtilidadesTorneo.pjParticipaDia(p2, filDia, torneo)) {
                 System.out.println("El personaje 2 ya participa ese dia");
 
             } else {
@@ -223,10 +223,10 @@ public class AgregarDueloLogica {
 
         while (!valido) {
             System.out.print("Ingrese codigo arma 1: ");
-            Arma a1 = uTorneo.buscarArma(sc.nextLine(), armas);
+            Arma a1 = UtilidadesTorneo.buscarArma(sc.nextLine(), armas);
 
             System.out.print("Ingrese codigo arma 2: ");
-            Arma a2 = uTorneo.buscarArma(sc.nextLine(), armas);
+            Arma a2 = UtilidadesTorneo.buscarArma(sc.nextLine(), armas);
 
             if (a1 == null) {
                 System.out.println("El arma 1 no existe");
@@ -262,7 +262,7 @@ public class AgregarDueloLogica {
             System.out.print("Ingrese codigo de arena: ");
             String codArena = sc.nextLine();
 
-            arena = uTorneo.buscarArena(codArena, arenas);
+            arena = UtilidadesTorneo.buscarArena(codArena, arenas);
 
             if (arena != null) {
                 valido = true;
