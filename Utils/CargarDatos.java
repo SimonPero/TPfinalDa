@@ -17,7 +17,6 @@ import java.io.IOException;
  * estructuras recibidas por parámetro.
  */
 public class CargarDatos {
-    private UtilidadesTorneo utilidadesTorneo = new UtilidadesTorneo();
 
     /**
      * Lee un archivo de arenas y carga cada registro dentro del
@@ -33,7 +32,7 @@ public class CargarDatos {
      * @param archivo Ruta del archivo de arenas.
      * @param arenas  Arreglo donde se almacenarán las arenas cargadas.
      */
-    public void cargarArenas(String archivo, Arena[] arenas) {
+    public static void cargarArenas(String archivo, Arena[] arenas) {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             int i = 0;
@@ -66,7 +65,7 @@ public class CargarDatos {
      * @param archivo Ruta del archivo de armas.
      * @param armas   Arreglo donde se almacenarán las armas cargadas.
      */
-    public void cargarArmas(String archivo, Arma[] armas) {
+    public static void cargarArmas(String archivo, Arma[] armas) {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             int i = 0;
@@ -99,7 +98,7 @@ public class CargarDatos {
      * @param archivo    Ruta del archivo de personajes.
      * @param personajes Arreglo donde se almacenarán los personajes cargados.
      */
-    public void cargarPersonajes(String archivo, Personaje[] personajes) {
+    public static void cargarPersonajes(String archivo, Personaje[] personajes) {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             int i = 0;
@@ -112,7 +111,7 @@ public class CargarDatos {
                         Integer.parseInt(datos[3]),
                         Integer.parseInt(datos[4]),
                         Integer.parseInt(datos[5]));
-                        ;
+                ;
 
                 i++;
             }
@@ -140,7 +139,7 @@ public class CargarDatos {
      * @param personajes Arreglo de personajes disponibles.
      * @param armas      Arreglo de armas disponibles.
      */
-    public void cargarDuelos(
+    public static void cargarDuelos(
             String archivo,
             Duelo[][] torneo,
             Personaje[] personajes,
@@ -152,14 +151,14 @@ public class CargarDatos {
 
                 // Convertimos día y hora a la posición correspondiente
                 // dentro de la matriz del torneo.
-                int dia = utilidadesTorneo.diaAfila(datos[6]);
+                int dia = UtilidadesTorneo.diaAfila(datos[6]);
                 int hora = Integer.parseInt(datos[7]) - 8;
 
-                Personaje p1 = utilidadesTorneo.buscarPersonaje(datos[1], personajes);
-                Personaje p2 = utilidadesTorneo.buscarPersonaje(datos[2], personajes);
+                Personaje p1 = UtilidadesTorneo.buscarPersonaje(datos[1], personajes);
+                Personaje p2 = UtilidadesTorneo.buscarPersonaje(datos[2], personajes);
 
-                Arma a1 = utilidadesTorneo.buscarArma(datos[3], armas);
-                Arma a2 = utilidadesTorneo.buscarArma(datos[4], armas);
+                Arma a1 = UtilidadesTorneo.buscarArma(datos[3], armas);
+                Arma a2 = UtilidadesTorneo.buscarArma(datos[4], armas);
 
                 torneo[dia][hora] = new Duelo(
                         datos[0],
