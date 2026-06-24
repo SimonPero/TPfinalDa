@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class torneoTest {
     static Scanner sc = new Scanner(System.in);
-    Duelo[][] torneo = new Duelo[7][15];
-    Personaje[] personajes = new Personaje[1000];
-    Arma[] armas = new Arma[1000];
-    Arena[] arenas = new Arena[1000];
+    static Duelo[][] torneo = new Duelo[7][15];
+    static Personaje[] personajes = new Personaje[1000];
+    static Arma[] armas = new Arma[1000];
+    static Arena[] arenas = new Arena[1000];
     CargarDatos cDatos = new CargarDatos();
 
     // 1. Este modulo se encarga de Carcar los archivos de .txt
@@ -24,7 +24,7 @@ public class torneoTest {
     }
 
     // 2. Agregar un nuevo personaje
-    public void agregarPersonaje() {
+    public static void agregarPersonaje() {
         String codigoP = "P000";
         boolean codigoValido = false;
 
@@ -72,7 +72,7 @@ public class torneoTest {
     }
 
     // 3. Agregar un nuevo duelo al cronograma semanal
-    public void agregarDuelo() {
+    public static void agregarDuelo() {
         AgregarDueloLogica adLogica = new AgregarDueloLogica();
 
         String nroDuelo = adLogica.leerCodigoDuelo(torneo);
@@ -101,7 +101,7 @@ public class torneoTest {
     }
 
     // 4. Marcar un duelo como realizado
-    public void marcaDueloRealizado() {
+    public static void marcaDueloRealizado() {
         System.out.print("Ingrese el codigo del duelo realizado: ");
         String idDuelo = sc.nextLine();
         if (UtilidadesTorneo.verificarCodigoUniversal(idDuelo, 'D')) {
@@ -141,13 +141,13 @@ public class torneoTest {
     }
 
     // 5. Calcular en forma recursiva la cantidad total de duelos realizados
-    public void cantDueloRealizados() {
+    public static void cantDueloRealizados() {
         System.out.println("La cantidad de duelos REALIZADOS: " + UtilidadesTorneo.duelosRealizados(torneo, 0, 0));
     }
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
-    public void ordenarDia() {
+    public static void ordenarDia() {
         System.out.println();
         // Pedimos al usuario que ingrese el dia a ordenar
         System.out.println("Ingrese el dia a ordenar (lunes a domingo): ");
@@ -167,7 +167,7 @@ public class torneoTest {
     }
 
     // 7. Mostrar los datos de un personaje dado
-    public void mostrarPersonaje() {
+    public static void mostrarPersonaje() {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
         String idP = sc.nextLine();
 
@@ -184,7 +184,7 @@ public class torneoTest {
     }
 
     // 8. Obtener en un arreglo los duelos cuyo poder total está dentro de ese rango
-    public Duelo[] mostrarDuelosRangos() {
+    public static Duelo[] mostrarDuelosRangos() {
         Duelo[] dueloRango = new Duelo[105];
         // Se crea el arreglo para los duelos que entre al rango
         int ac = 0;
@@ -207,12 +207,12 @@ public class torneoTest {
     }
 
     // 9. Calcular recursivamente la cantidad de horarios
-    public void horarios() {
+    public static void horarios() {
         System.out.println("La cantidad de horarios libres es de: " + UtilidadesTorneo.horariosLibres(torneo, 0, 0));
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica
-    public void mostrarDueloMagia() {
+    public static void mostrarDueloMagia() {
         boolean flag = true;
         int i = 0;
         int j = 0;
@@ -241,7 +241,7 @@ public class torneoTest {
 
     // Este modulo sirve para escribir y leer las opciones, la cantidad de veces que
     // el usuario quiera.
-    public void menu() {
+    public static void menu() {
         int opcion;
 
         do {// Repetir la cantidad de veces que el usuario desee
