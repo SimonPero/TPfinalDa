@@ -22,8 +22,7 @@ public class AgregarDueloLogica {
      * evitar usos indebidos de la funcion como: * AgregarDueloLogica.sc.nextLine();
      * 
      */
-    private Scanner sc = new Scanner(System.in);
-    private UtilidadesTorneo uTorneo = new UtilidadesTorneo();
+    static Scanner sc = new Scanner(System.in);
 
     /**
      * Solicita un código de duelo y verifica que:
@@ -35,7 +34,7 @@ public class AgregarDueloLogica {
      * @param torneo Matriz que almacena los duelos del torneo.
      * @return Código de duelo validado.
      */
-    public String leerCodigoDuelo(Duelo[][] torneo) {
+    public static String leerCodigoDuelo(Duelo[][] torneo) {
 
         String codDuelo = null;
         boolean valido = false;
@@ -66,7 +65,7 @@ public class AgregarDueloLogica {
      * @param torneo Matriz de duelos del torneo.
      * @return Fila (día) validada.
      */
-    public int leerDia(Duelo[][] torneo) {
+    public static int leerDia(Duelo[][] torneo) {
         int filDia = -1;
         boolean valido = false;
 
@@ -99,7 +98,7 @@ public class AgregarDueloLogica {
      * @param filDia Fila correspondiente al día a verificar.
      * @return true si no queda ningún horario libre, false en caso contrario.
      */
-    private boolean diaCompleto(Duelo[][] torneo, int filDia) {
+    private static boolean diaCompleto(Duelo[][] torneo, int filDia) {
         for (int j = 0; j < torneo[filDia].length; j++) {
             if (torneo[filDia][j] == null) {
                 return false;
@@ -120,7 +119,7 @@ public class AgregarDueloLogica {
      * @param filDia Fila correspondiente al día ya seleccionado.
      * @return Hora validada en formato "HH".
      */
-    public String leerHora(Duelo[][] torneo, int filDia) {
+    public static String leerHora(Duelo[][] torneo, int filDia) {
 
         String horaReal = null;
         boolean valido = false;
@@ -159,7 +158,7 @@ public class AgregarDueloLogica {
      *         res[0] = primer personaje.
      *         res[1] = segundo personaje.
      */
-    public Personaje[] leerPersonajes(
+    public static Personaje[] leerPersonajes(
             Duelo[][] torneo,
             Personaje[] personajes,
             int filDia) {
@@ -216,7 +215,7 @@ public class AgregarDueloLogica {
      *         res[0] = arma del primer participante.
      *         res[1] = arma del segundo participante.
      */
-    public Arma[] leerArmas(Arma[] armas) {
+    public static Arma[] leerArmas(Arma[] armas) {
 
         Arma[] res = new Arma[2];
         boolean valido = false;
@@ -253,7 +252,7 @@ public class AgregarDueloLogica {
      * @param arenas Arreglo de arenas disponibles.
      * @return Arena seleccionada.
      */
-    public Arena leerArena(Arena[] arenas) {
+    public static Arena leerArena(Arena[] arenas) {
 
         Arena arena = null;
         boolean valido = false;
