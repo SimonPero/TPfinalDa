@@ -13,7 +13,6 @@ public class torneoTest {
     Personaje[] personajes = new Personaje[1000];
     Arma[] armas = new Arma[1000];
     Arena[] arenas = new Arena[1000];
-    UtilidadesTorneo uTorneo = new UtilidadesTorneo();
     CargarDatos cDatos = new CargarDatos();
 
     // 1. Este modulo se encarga de Carcar los archivos de .txt
@@ -33,15 +32,15 @@ public class torneoTest {
             System.out.print("Ingrese el codigo del personaje: ");
             codigoP = sc.nextLine();
 
-            if (uTorneo.verificarCodigoUniversal(codigoP, 'P')
-                    && uTorneo.buscarPersonaje(codigoP, personajes) == null) {
+            if (UtilidadesTorneo.verificarCodigoUniversal(codigoP, 'P')
+                    && UtilidadesTorneo.buscarPersonaje(codigoP, personajes) == null) {
                 codigoValido = true;
                 System.out.println("Codigo valido!");
             } else {
                 System.out.println("Codigo invalido o ya existente! Intente nuevamente.\n");
             }
         }
-        //Se asigna un código
+        // Se asigna un código
         System.out.print("Ingrese el nombre: ");
         String nombre = sc.nextLine();
 
@@ -56,7 +55,7 @@ public class torneoTest {
 
         System.out.print("Ingrese la cantidad de duelos perdidos: ");
         int cantDP = sc.nextInt();
-        //Se asignan datos para cargarlos en el personaje
+        // Se asignan datos para cargarlos en el personaje
         sc.nextLine();
         int i = 0;
         boolean cargado = false;
@@ -94,7 +93,7 @@ public class torneoTest {
                 armasDuelo[0],
                 armasDuelo[1],
                 arena.getNombreArena(),
-                uTorneo.filaADia(filDia),
+                UtilidadesTorneo.filaADia(filDia),
                 hora,
                 "programado");
 
@@ -105,8 +104,8 @@ public class torneoTest {
     public void marcaDueloRealizado() {
         System.out.print("Ingrese el codigo del duelo realizado: ");
         String idDuelo = sc.nextLine();
-        if (uTorneo.verificarCodigoUniversal(idDuelo, 'D')) {
-            Duelo due = uTorneo.buscarDuelo(idDuelo, torneo);
+        if (UtilidadesTorneo.verificarCodigoUniversal(idDuelo, 'D')) {
+            Duelo due = UtilidadesTorneo.buscarDuelo(idDuelo, torneo);
             if (due.getEstado().equals("programado")) {
                 due.setEstado("realizado");
 
@@ -129,7 +128,7 @@ public class torneoTest {
                     p2.sumaVictoria();
                     p1.sumaDerrotas();
                 }
-                //Se modifican las victorias del ganador y las derrotas del perdedor
+                // Se modifican las victorias del ganador y las derrotas del perdedor
                 System.out.println(due);
             } else {
                 System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
@@ -143,7 +142,7 @@ public class torneoTest {
 
     // 5. Calcular en forma recursiva la cantidad total de duelos realizados
     public void cantDueloRealizados() {
-        System.out.println("La cantidad de duelos REALIZADOS: " + uTorneo.duelosRealizados(torneo, 0, 0));
+        System.out.println("La cantidad de duelos REALIZADOS: " + UtilidadesTorneo.duelosRealizados(torneo, 0, 0));
     }
 
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
@@ -153,18 +152,18 @@ public class torneoTest {
         // Pedimos al usuario que ingrese el dia a ordenar
         System.out.println("Ingrese el dia a ordenar (lunes a domingo): ");
         String dia = sc.nextLine();
-        int filTorneo = uTorneo.diaAfila(dia);// Convertimos el dia de String a int
+        int filTorneo = UtilidadesTorneo.diaAfila(dia);// Convertimos el dia de String a int
 
         if (filTorneo != -1) {
-            Duelo[] arrayCopia = uTorneo.obternerFilaOrdenada(torneo, filTorneo);
+            Duelo[] arrayCopia = UtilidadesTorneo.obternerFilaOrdenada(torneo, filTorneo);
             for (int i = 0; i < arrayCopia.length; i++) {
                 if (arrayCopia[i] != null) {
                     System.out.println(arrayCopia[i] + " ");
                 }
             }
-            uTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
+            UtilidadesTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
         }
-        //Se ordena el día y se muestra
+        // Se ordena el día y se muestra
     }
 
     // 7. Mostrar los datos de un personaje dado
@@ -172,8 +171,8 @@ public class torneoTest {
         System.out.print("Ingrese el codigo del personaje a visualizar: ");
         String idP = sc.nextLine();
 
-        if (uTorneo.verificarCodigoUniversal(idP, 'P')) {
-            Personaje pj = uTorneo.buscarPersonaje(idP, personajes);
+        if (UtilidadesTorneo.verificarCodigoUniversal(idP, 'P')) {
+            Personaje pj = UtilidadesTorneo.buscarPersonaje(idP, personajes);
             if (pj != null) {
                 System.out.println(pj);
             } else {
@@ -196,7 +195,7 @@ public class torneoTest {
         // Se piden los límites del rango
         for (int i = 0; i < torneo.length; i++) {
             for (int j = 0; j < torneo[0].length; j++) {
-                int poderT = uTorneo.calcularPoderTotal(torneo[i][j]);
+                int poderT = UtilidadesTorneo.calcularPoderTotal(torneo[i][j]);
                 if (poderT >= rangoMin && poderT <= rangoMax) {
                     dueloRango[ac] = torneo[i][j];
                     // Si el poder total del duelo entra en el rango se agrega al arreglo
@@ -209,7 +208,7 @@ public class torneoTest {
 
     // 9. Calcular recursivamente la cantidad de horarios
     public void horarios() {
-        System.out.println("La cantidad de horarios libres es de: " + uTorneo.horariosLibres(torneo, 0, 0));
+        System.out.println("La cantidad de horarios libres es de: " + UtilidadesTorneo.horariosLibres(torneo, 0, 0));
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica
@@ -225,14 +224,15 @@ public class torneoTest {
                 if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica()
                         || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
                     flag = false;
-                    System.out.println("El primer duelo con un arma mágica del día " + uTorneo.filaADia(i)
+                    System.out.println("El primer duelo con un arma mágica del día " + UtilidadesTorneo.filaADia(i)
                             + " es a las " + (j + 8));
                     // Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
                 }
                 j++;
             }
             if (flag) {
-                System.out.println("En el día " + uTorneo.filaADia(i) + " no hay ningún duelo con alguna arma mágica");
+                System.out.println(
+                        "En el día " + UtilidadesTorneo.filaADia(i) + " no hay ningún duelo con alguna arma mágica");
                 // Solo llega si en el día no se usa ninguna arma mágica
             }
             i++;
