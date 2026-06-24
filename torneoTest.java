@@ -322,8 +322,7 @@ public class torneoTest {
     }
 
     public static void main(String[] args) {
-        torneoTest test = new torneoTest();
-        test.cargarTxt();
-        test.menu();
+        torneoTest.cargarTxt();
+        torneoTest.menu();
     }
 }
