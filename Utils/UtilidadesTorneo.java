@@ -194,7 +194,6 @@ public class UtilidadesTorneo {
                     char num = codigo.charAt(i);
 
                     if (!Character.isDigit(num)) {
-                        System.out.println("asdas");
                         flag = false;
                     }
                     i++;
@@ -419,6 +418,7 @@ public class UtilidadesTorneo {
             escritor.newLine();
             escritor.write("=================================================================");
             if (arr.length > 0 && arr[0] != null) {
+                escritor.newLine();
                 escritor.write("Dia del Torneo: " + arr[0].getDia());
                 escritor.newLine();
                 escritor.write("-----------------------------------------------------------------");
