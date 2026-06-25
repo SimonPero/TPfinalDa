@@ -13,7 +13,8 @@ public class Personaje {
         this.id = unId;
     }
 
-    public Personaje(String unId, String unNombre, String unTipo,int nivelEnergia, int laCantDuelosGanados, int laCantDuelosPerdidos) {
+    public Personaje(String unId, String unNombre, String unTipo, int nivelEnergia, int laCantDuelosGanados,
+            int laCantDuelosPerdidos) {
         this.id = unId;
         this.nombre = unNombre;
         this.tipo = unTipo;
@@ -38,6 +39,7 @@ public class Personaje {
     public int getNivelEnergiaP() {
         return nivelEnergiaP;
     }
+
     public int getCantDuelosGandados() {
         return cantDuelosGandados;
     }
@@ -48,7 +50,8 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Personaje [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + "NiverlEnergia="+nivelEnergiaP+", cantDuelosGandados="
+        return "Personaje [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + "NiverlEnergia=" + nivelEnergiaP
+                + ", cantDuelosGandados="
                 + cantDuelosGandados + ", cantDuelosPerdidos=" + cantDuelosPerdidos + "]";
     }
 
@@ -83,7 +86,7 @@ public class Personaje {
     }
 
     public int sumaDerrotas() {
-        return this.cantDuelosGandados += 1;
+        return this.cantDuelosPerdidos += 1;
     }
 
 }

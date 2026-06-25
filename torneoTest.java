@@ -192,11 +192,13 @@ public class torneoTest {
         // Se piden los límites del rango
         for (int i = 0; i < torneo.length; i++) {
             for (int j = 0; j < torneo[0].length; j++) {
-                int poderT = UtilidadesTorneo.calcularPoderTotal(torneo[i][j]);
-                if (poderT >= rangoMin && poderT <= rangoMax) {
-                    dueloRango[ac] = torneo[i][j];
-                    // Si el poder total del duelo entra en el rango se agrega al arreglo
-                    ac++;
+                if (torneo[i][j] != null) {
+                    int poderT = UtilidadesTorneo.calcularPoderTotal(torneo[i][j]);
+                    if (poderT >= rangoMin && poderT <= rangoMax) {
+                        dueloRango[ac] = torneo[i][j];
+                        // Si el poder total del duelo entra en el rango se agrega al arreglo
+                        ac++;
+                    }
                 }
             }
         }
@@ -218,14 +220,16 @@ public class torneoTest {
             j = 0;
             flag = true;
             while (flag && j < torneo[0].length) {
-                if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica()
-                        || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
-                    flag = false;
-                    System.out.println("El primer duelo con un arma mágica del día " + UtilidadesTorneo.filaADia(i)
-                            + " es a las " + (j + 8));
-                    // Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
+                if (torneo[i][j] != null) {
+                    if (torneo[i][j].getArmaPrimerPersonaje().getEsMagica()
+                            || torneo[i][j].getArmaSegundoPersonaje().getEsMagica()) {
+                        flag = false;
+                        System.out.println("El primer duelo con un arma mágica del día " + UtilidadesTorneo.filaADia(i)
+                                + " es a las " + (j + 8));
+                        // Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
+                    }
+                    j++;
                 }
-                j++;
             }
             if (flag) {
                 System.out.println(
@@ -292,7 +296,6 @@ public class torneoTest {
 
                     case 7:
                         Duelo[] arr = mostrarDuelosRangos();
-                        System.out.println(arr[0]);
                         for (int i = 0; i < arr.length && arr[i] != null; i++) {
                             System.out.println(arr[i]);
                         }
