@@ -108,7 +108,7 @@ public class torneoTest {
 
                 System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
                 String pGanador = sc.nextLine();
-
+                pGanador = pGanador.toUpperCase();
                 Personaje p1 = due.getPrimerPersonaje();
                 Personaje p2 = due.getSegundoPersonaje();
 
@@ -128,9 +128,10 @@ public class torneoTest {
                 // Se modifican las victorias del ganador y las derrotas del perdedor
                 System.out.println(due);
             } else {
-                System.out.println("El duelo ya fue realizado, error de codigo!");// No se debe permitir marcar como
-                                                                                  // realizado un duelo que ya fue
-                                                                                  // realizado.
+                System.out.println("El duelo ya fue realizado, no se puede volver a realizar");// No se debe permitir
+                                                                                               // marcar como
+                // realizado un duelo que ya fue
+                // realizado.
             }
 
         }
