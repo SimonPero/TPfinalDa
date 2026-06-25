@@ -107,15 +107,14 @@ public class torneoTest {
                 due.setEstado("realizado");
 
                 System.out.println("Ingrese el codigo Personaje ganador: ");// Se debe indicar el personaje ganador.
-                String pGanador = sc.nextLine();
-                pGanador = pGanador.toUpperCase();
+                String pGanador = sc.nextLine().toUpperCase();
                 Personaje p1 = due.getPrimerPersonaje();
                 Personaje p2 = due.getSegundoPersonaje();
 
                 while (!p1.getId().equals(pGanador) && !p2.getId().equals(pGanador)) {
                     System.out.println("El código ingresado no corresponde a ningún personaje de este duelo.");
                     System.out.print("Ingrese nuevamente el código del ganador: ");
-                    pGanador = sc.nextLine();
+                    pGanador = sc.nextLine().toUpperCase();
                 }
 
                 if (p1.getId().equals(pGanador)) {
@@ -161,6 +160,10 @@ public class torneoTest {
             }
             UtilidadesTorneo.guardarEnArchivo(arrayCopia, dia + " Ordenado");
         }
+
+        if (filTorneo == -1) {
+            System.out.println("Ingrese un dia correctamente");
+        }
         // Se ordena el día y se muestra
     }
 
@@ -186,10 +189,64 @@ public class torneoTest {
         Duelo[] dueloRango = new Duelo[105];
         // Se crea el arreglo para los duelos que entre al rango
         int ac = 0;
-        System.out.println("Ingrese el mínimo para calcular el rango ");
-        int rangoMin = sc.nextInt();
-        System.out.println("Ingrese el máximo para calcular el rango ");
-        int rangoMax = sc.nextInt();
+
+        int rangoMin;
+        while (true) {
+            System.out.print("Ingrese el mínimo para calcular el rango: ");
+
+            if (sc.hasNextInt()) {
+                rangoMin = sc.nextInt();
+                sc.nextLine(); // consumir el salto de línea
+                break;
+            }
+
+            System.out.println("Error: debe ingresar un número entero.");
+            sc.nextLine(); // descartar entrada inválida
+        }
+
+        int rangoMax;
+        while (true) {
+            System.out.print("Ingrese el máximo para calcular el rango: ");
+
+            if (sc.hasNextInt()) {
+                rangoMax = sc.nextInt();
+                sc.nextLine();
+                break;
+            }
+
+            System.out.println("Error: debe ingresar un número entero.");
+            sc.nextLine();
+        }
+
+        while (rangoMin > rangoMax) {
+            System.out.println("Error: el mínimo no puede ser mayor que el máximo.");
+
+            while (true) {
+                System.out.print("Ingrese nuevamente el mínimo: ");
+
+                if (sc.hasNextInt()) {
+                    rangoMin = sc.nextInt();
+                    sc.nextLine();
+                    break;
+                }
+
+                System.out.println("Error: debe ingresar un número entero.");
+                sc.nextLine();
+            }
+
+            while (true) {
+                System.out.print("Ingrese nuevamente el máximo: ");
+
+                if (sc.hasNextInt()) {
+                    rangoMax = sc.nextInt();
+                    sc.nextLine();
+                    break;
+                }
+
+                System.out.println("Error: debe ingresar un número entero.");
+                sc.nextLine();
+            }
+        }
         // Se piden los límites del rango
         for (int i = 0; i < torneo.length; i++) {
             for (int j = 0; j < torneo[0].length; j++) {

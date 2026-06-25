@@ -50,7 +50,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Personaje [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + "NiverlEnergia=" + nivelEnergiaP
+        return "Personaje [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", NiverlEnergia=" + nivelEnergiaP
                 + ", cantDuelosGandados="
                 + cantDuelosGandados + ", cantDuelosPerdidos=" + cantDuelosPerdidos + "]";
     }
