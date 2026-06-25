@@ -228,8 +228,8 @@ public class torneoTest {
                                 + " es a las " + (j + 8));
                         // Si se detecta por lo menos un arma mágica en ese duelo se dice el horario
                     }
-                    j++;
                 }
+                j++;
             }
             if (flag) {
                 System.out.println(
