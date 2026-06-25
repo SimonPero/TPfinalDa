@@ -417,6 +417,7 @@ public class UtilidadesTorneo {
             escritor.write("--- DUELOS ORDENADOR POR PODER TOTAL");
             escritor.newLine();
             escritor.write("=================================================================");
+            escritor.newLine();
             if (arr.length > 0 && arr[0] != null) {
                 escritor.newLine();
                 escritor.write("Dia del Torneo: " + arr[0].getDia());
