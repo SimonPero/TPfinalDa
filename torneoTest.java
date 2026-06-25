@@ -190,28 +190,30 @@ public class torneoTest {
         // Se crea el arreglo para los duelos que entre al rango
         int ac = 0;
 
-        int rangoMin;
-        while (true) {
+        int rangoMin = 0;
+        boolean flag = true;
+        while (flag) {
             System.out.print("Ingrese el mínimo para calcular el rango: ");
 
             if (sc.hasNextInt()) {
                 rangoMin = sc.nextInt();
                 sc.nextLine(); // consumir el salto de línea
-                break;
+                flag = false;
             }
 
             System.out.println("Error: debe ingresar un número entero.");
             sc.nextLine(); // descartar entrada inválida
         }
 
-        int rangoMax;
-        while (true) {
+        int rangoMax = 0;
+        flag = true;
+        while (flag) {
             System.out.print("Ingrese el máximo para calcular el rango: ");
 
             if (sc.hasNextInt()) {
                 rangoMax = sc.nextInt();
                 sc.nextLine();
-                break;
+                flag = false;
             }
 
             System.out.println("Error: debe ingresar un número entero.");
