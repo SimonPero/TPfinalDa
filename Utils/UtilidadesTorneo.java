@@ -70,13 +70,13 @@ public class UtilidadesTorneo {
     public static Duelo buscarDuelo(String id, Duelo[][] duelo) {
         int i = 0;
         Duelo encontrado = null;
-        id = id.toUpperCase();
+        Duelo buscado = new Duelo(id);
 
         while (i < duelo.length && encontrado == null) {
             int j = 0;
 
             while (j < duelo[i].length && duelo[i][j] != null && encontrado == null) {
-                if (duelo[i][j].getNroDuelo().equals(id)) {
+                if (duelo[i][j].equals(buscado)) {
                     encontrado = duelo[i][j];
                 }
                 j++;
@@ -100,16 +100,12 @@ public class UtilidadesTorneo {
      */
     public static Personaje buscarPersonaje(String id, Personaje[] personajes) {
         int i = 0;
-        id = id.toUpperCase();
         Personaje encontrado = null;
-
+        Personaje buscado = new Personaje(id.toUpperCase());
         while (i < personajes.length && personajes[i] != null && encontrado == null) {
-            String idP = personajes[i].getId();
-
-            if (idP.equalsIgnoreCase(id)) {
+            if (personajes[i].equals(buscado)) {
                 encontrado = personajes[i];
             }
-
             i++;
         }
 
@@ -128,17 +124,17 @@ public class UtilidadesTorneo {
      */
     public static Arena buscarArena(String id, Arena[] arenas) {
         int i = 0;
-        id = id.toUpperCase();
+        Arena encontrado = null;
+        Arena buscado = new Arena(id.toUpperCase());
 
-        while (i < arenas.length &&
-                arenas[i] != null &&
-                !arenas[i].getIdArena().equals(id)) {
+        while (i < arenas.length && arenas[i] != null && encontrado == null) {
+            if (arenas[i].equals(buscado)) {
+                encontrado = arenas[i];
+            }
             i++;
         }
 
-        return (i < arenas.length && arenas[i] != null)
-                ? arenas[i]
-                : null;
+        return encontrado;
     }
 
     /**
@@ -153,17 +149,17 @@ public class UtilidadesTorneo {
      */
     public static Arma buscarArma(String id, Arma[] armas) {
         int i = 0;
-        id = id.toUpperCase();
+        Arma encontrado = null;
+        Arma buscado = new Arma(id.toUpperCase());
 
-        while (i < armas.length &&
-                armas[i] != null &&
-                !armas[i].getIdArma().equals(id)) {
+        while (i < armas.length && armas[i] != null && encontrado == null) {
+            if (armas[i].equals(buscado)) {
+                encontrado = armas[i];
+            }
             i++;
         }
 
-        return (i < armas.length && armas[i] != null)
-                ? armas[i]
-                : null;
+        return encontrado;
     }
 
     /**
