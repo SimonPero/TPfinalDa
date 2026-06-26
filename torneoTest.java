@@ -144,11 +144,6 @@ public class torneoTest {
 
     }
 
-    // 5. Calcular en forma recursiva la cantidad total de duelos realizados
-    public static void cantDueloRealizados() {
-        System.out.println("La cantidad de duelos REALIZADOS: " + UtilidadesTorneo.duelosRealizados(torneo, 0, 0));
-    }
-
     // 6. Mostrar los duelos de un día ordenados por poder total de combate
     // Método principal para iniciar el ordenamiento
     public static void ordenarDia() {
@@ -215,11 +210,6 @@ public class torneoTest {
             }
         }
         return dueloRango;
-    }
-
-    // 9. Calcular recursivamente la cantidad de horarios
-    public static void horarios() {
-        System.out.println("La cantidad de horarios libres es de: " + UtilidadesTorneo.horariosLibres(torneo, 0, 0));
     }
 
     // 10. Mostrar para cada día el primer duelo con arma mágica
@@ -295,7 +285,9 @@ public class torneoTest {
                         break;
 
                     case 4:
-                        cantDueloRealizados();
+                        // 5. Calcular en forma recursiva la cantidad total de duelos realizados
+                        System.out.println(
+                                "La cantidad de duelos REALIZADOS: " + UtilidadesTorneo.duelosRealizados(torneo, 0, 0));
                         break;
 
                     case 5:
@@ -314,7 +306,9 @@ public class torneoTest {
                         break;
 
                     case 8:
-                        horarios();
+                        // 9. Calcular recursivamente la cantidad de horarios
+                        System.out.println("La cantidad de horarios libres es de: "
+                                + UtilidadesTorneo.horariosLibres(torneo, 0, 0));
                         break;
 
                     case 9:
