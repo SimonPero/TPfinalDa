@@ -111,4 +111,9 @@ public class Duelo {
     public boolean equals(Duelo otroDuelo) {
         return this.nroDuelo.equals(otroDuelo.getNroDuelo());
     }
+
+    public int calcularPoderTotal() {
+        return this.primerPersonaje.getNivelEnergiaP() + this.armaPrimerPersonaje.getPoder()
+                + this.segundoPersonaje.getNivelEnergiaP() + this.armaSegundoPersonaje.getPoder();
+    }
 }

@@ -101,16 +101,19 @@ public class UtilidadesTorneo {
     public static Personaje buscarPersonaje(String id, Personaje[] personajes) {
         int i = 0;
         id = id.toUpperCase();
+        Personaje encontrado = null;
 
-        while (i < personajes.length &&
-                personajes[i] != null &&
-                !personajes[i].getId().equals(id)) {
+        while (i < personajes.length && personajes[i] != null && encontrado == null) {
+            String idP = personajes[i].getId();
+
+            if (idP.equalsIgnoreCase(id)) {
+                encontrado = personajes[i];
+            }
+
             i++;
         }
 
-        return (i < personajes.length && personajes[i] != null)
-                ? personajes[i]
-                : null;
+        return encontrado;
     }
 
     /**
@@ -297,25 +300,6 @@ public class UtilidadesTorneo {
     }
 
     /**
-     * Obtiene el nivel de energia de cada personaje y armas que participan en un
-     * duelo.
-     * 
-     * @param duelo
-     * @return La suma de nivel de poder total de los 2 personajes y 2 armas.
-     */
-    public static int calcularPoderTotal(Duelo duelo) {
-        int sumaPoder = 0;
-        if (duelo != null) {
-            int Ep1 = duelo.getPrimerPersonaje().getNivelEnergiaP();
-            int Ea1 = duelo.getArmaPrimerPersonaje().getPoder();
-            int Ep2 = duelo.getSegundoPersonaje().getNivelEnergiaP();
-            int Ea2 = duelo.getArmaSegundoPersonaje().getPoder();
-            sumaPoder = Ep1 + Ea1 + Ep2 + Ea2;
-        }
-        return sumaPoder;
-    }
-
-    /**
      * Buscamos, en un arrelgo de Duelo, el dia elegido. Luego se crea otro arrelgo
      * Copia para poder ordenar un arreglo sin tener que modificar la matriz
      * original.
@@ -385,7 +369,7 @@ public class UtilidadesTorneo {
         int i = ini - 1;
 
         for (int j = ini; j < fin; j++) {
-            if (calcularPoderTotal(fila[j]) > calcularPoderTotal(fila[fin])) {
+            if (fila[j].calcularPoderTotal() > fila[fin].calcularPoderTotal()) {
                 i++;
 
                 temp = fila[i];
@@ -430,7 +414,7 @@ public class UtilidadesTorneo {
                 Duelo d = arr[i];
 
                 if (d != null) {
-                    int poderTotal = calcularPoderTotal(arr[i]);
+                    int poderTotal = arr[i].calcularPoderTotal();
                     {// Elegimos todos los atributos para escribir en el archivo
                         escritor.write("Nro Duelo: " + d.getNroDuelo());
                         escritor.write(" | ");

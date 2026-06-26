@@ -24,12 +24,12 @@ public class torneoTest {
 
     // 2. Agregar un nuevo personaje
     public static void agregarPersonaje() {
-        String codigoP = "P000";
+        String codigoP = "";
         boolean codigoValido = false;
 
         while (!codigoValido) {
             System.out.print("Ingrese el codigo del personaje: ");
-            codigoP = sc.nextLine();
+            codigoP = sc.nextLine().trim();
 
             if (UtilidadesTorneo.verificarCodigoUniversal(codigoP, 'P')
                     && UtilidadesTorneo.buscarPersonaje(codigoP, personajes) == null) {
@@ -39,34 +39,41 @@ public class torneoTest {
                 System.out.println("Codigo invalido o ya existente! Intente nuevamente.\n");
             }
         }
-        // Se asigna un código
+
         System.out.print("Ingrese el nombre: ");
-        String nombre = sc.nextLine();
+        String nombre = sc.nextLine().trim();
 
         System.out.print("Ingrese el tipo de personaje: ");
-        String tipo = sc.nextLine();
+        String tipo = sc.nextLine().trim();
 
         System.out.print("Ingrese su nivel de energia: ");
         int nivelEnergia = sc.nextInt();
+        sc.nextLine();
 
         System.out.print("Ingrese la cantidad de duelos ganados: ");
         int cantDG = sc.nextInt();
+        sc.nextLine();
 
         System.out.print("Ingrese la cantidad de duelos perdidos: ");
         int cantDP = sc.nextInt();
-        // Se asignan datos para cargarlos en el personaje
         sc.nextLine();
-        int i = 0;
+
         boolean cargado = false;
 
-        while (i < personajes.length && !cargado) {
+        for (int i = 0; i < personajes.length && !cargado; i++) {
             if (personajes[i] == null) {
-                personajes[i] = new Personaje(codigoP, nombre, tipo, nivelEnergia, cantDG, cantDP);
+                personajes[i] = new Personaje(
+                        codigoP.trim().toUpperCase(),
+                        nombre.trim(),
+                        tipo.trim(),
+                        nivelEnergia,
+                        cantDG,
+                        cantDP);
+
                 System.out.println(personajes[i]);
                 System.out.println("Personaje cargado con exito!");
                 cargado = true;
             }
-            i++;
         }
     }
 
@@ -190,70 +197,15 @@ public class torneoTest {
         // Se crea el arreglo para los duelos que entre al rango
         int ac = 0;
 
-        int rangoMin = 0;
-        boolean flag = true;
-        while (flag) {
-            System.out.print("Ingrese el mínimo para calcular el rango: ");
-
-            if (sc.hasNextInt()) {
-                rangoMin = sc.nextInt();
-                sc.nextLine(); // consumir el salto de línea
-                flag = false;
-            }
-
-            System.out.println("Error: debe ingresar un número entero.");
-            sc.nextLine(); // descartar entrada inválida
-        }
-
-        int rangoMax = 0;
-        flag = true;
-        while (flag) {
-            System.out.print("Ingrese el máximo para calcular el rango: ");
-
-            if (sc.hasNextInt()) {
-                rangoMax = sc.nextInt();
-                sc.nextLine();
-                flag = false;
-            }
-
-            System.out.println("Error: debe ingresar un número entero.");
-            sc.nextLine();
-        }
-
-        while (rangoMin > rangoMax) {
-            System.out.println("Error: el mínimo no puede ser mayor que el máximo.");
-
-            while (true) {
-                System.out.print("Ingrese nuevamente el mínimo: ");
-
-                if (sc.hasNextInt()) {
-                    rangoMin = sc.nextInt();
-                    sc.nextLine();
-                    break;
-                }
-
-                System.out.println("Error: debe ingresar un número entero.");
-                sc.nextLine();
-            }
-
-            while (true) {
-                System.out.print("Ingrese nuevamente el máximo: ");
-
-                if (sc.hasNextInt()) {
-                    rangoMax = sc.nextInt();
-                    sc.nextLine();
-                    break;
-                }
-
-                System.out.println("Error: debe ingresar un número entero.");
-                sc.nextLine();
-            }
-        }
+        System.out.println("Ingrese el mínimo para calcular el rango ");
+        int rangoMin = sc.nextInt();
+        System.out.println("Ingrese el máximo para calcular el rango ");
+        int rangoMax = sc.nextInt();
         // Se piden los límites del rango
         for (int i = 0; i < torneo.length; i++) {
             for (int j = 0; j < torneo[0].length; j++) {
                 if (torneo[i][j] != null) {
-                    int poderT = UtilidadesTorneo.calcularPoderTotal(torneo[i][j]);
+                    int poderT = torneo[i][j].calcularPoderTotal();
                     if (poderT >= rangoMin && poderT <= rangoMax) {
                         dueloRango[ac] = torneo[i][j];
                         // Si el poder total del duelo entra en el rango se agrega al arreglo
